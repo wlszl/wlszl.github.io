@@ -1,17 +1,17 @@
-# v-listtree —— vue无限级菜单
+# listtree —— vue无限级菜单
 
-v-listtree 是基于vue设计的无限级菜单插件，基本可以满足大部分纵列多级别菜单的需求，并且用户定义菜单样式的自由度非常高，具体到每一级别的菜单甚至每一个菜单分支的单独样式都可以自由定义，和自己写css样式没有任何区别。菜单前的小图标可以使用系统默认的图标，也可以使用阿里巴巴图标库和Font Awesome图标库里的图标，当然你也可以使用自己设计的png、icon等格式的图标。
+listtree 是基于vue设计的无限级菜单插件，基本可以满足大部分纵列多级别菜单的需求，并且用户定义菜单样式的自由度非常高，具体到每一级别的菜单甚至每一个菜单分支的单独样式都可以自由定义，和自己写css样式没有任何区别。菜单前的小图标可以使用系统默认的图标，也可以使用阿里巴巴图标库和Font Awesome图标库里的图标，当然你也可以使用自己设计的png、icon等格式的图标。
 
 ## 安装
 
-    npm install v-listtree -S
+    npm install listtree -S
 
 ## 使用
 
 > 在需要插入菜单的组件插入JS代码：
 
     import Vue from 'vue'
-    import Listtree from 'v-listtree'
+    import Listtree from 'listtree'
 
     Vue.use(Listtree, {
       listData: require('../static/listdata.json'),
@@ -30,7 +30,7 @@ v-listtree 是基于vue设计的无限级菜单插件，基本可以满足大部
 > 其中listdata.json是菜单的数据内容，下面讲参数时会具体说明。
 ## 参数
 
-> v-listtree 一共有8个参数：listData、open、openOnly、indent、spacing、icon、iconSize、animation，通过配置这8个参数可以使 v-listtree 适应不同类型的菜单需求，为了描述方便，这里假设你要插入本插件的组件为mytree.vue(建议用空组件来引入本插件，然后在需要使用本本插件的地方直接import该组件)
+> listtree 一共有8个参数：listData、open、openOnly、indent、spacing、icon、iconSize、animation，通过配置这8个参数可以使 listtree 适应不同类型的菜单需求，为了描述方便，这里假设你要插入本插件的组件为mytree.vue(建议用空组件来引入本插件，然后在需要使用本本插件的地方直接import该组件)
 
 ### 1、listData [Array 必选]
 
@@ -72,9 +72,9 @@ v-listtree 是基于vue设计的无限级菜单插件，基本可以满足大部
 
 > __children__ [Array 可选]：菜单的子分支。
 
-下面截图是 v-listtree 的一个典型例子：
+下面截图是 listtree 的一个典型例子：
 
-<img src="https://github.com/wulin1978/vuetest/blob/master/static/lizi.png?raw=true">
+<img src="https://github.com/wlszl/listtree/blob/master/src/assets/listtree.png?raw=true">
 
 
 ### 2、open [Number/Array 1 可选]
@@ -101,7 +101,7 @@ open 控制各菜单分支的默认展开闭合状态
 
 ### 6、icon [Number/Array 1 可选]
 
-> icon 控制图标样式，它可以是数字，也可以是数组。当 icon 为数字时，图标显示的是 v-listtree 提供的图标样式，目前提供 1 到 10 十种样式。当图标为数组时，用户可以从阿里巴巴图标库或Font Awesome图标库选择图标，也可以使用png、icon等图片格式的图标。数组的第一个元素数据类型是字符串，指向菜单闭合时使用的图标。数组第二个元素可以是字符串也可以是number，当为字符串的时候它指向菜单展开时使用的图标，当为number时，表示菜单展开和闭合时使用同一个图标，但展开时图标顺时针旋转一个角度，这个角度的值即为数组第二个元素的值。
+> icon 控制图标样式，它可以是数字，也可以是数组。当 icon 为数字时，图标显示的是 listtree 提供的图标样式，目前提供 1 到 10 十种样式。当图标为数组时，用户可以从阿里巴巴图标库或Font Awesome图标库选择图标，也可以使用png、icon等图片格式的图标。数组的第一个元素数据类型是字符串，指向菜单闭合时使用的图标。数组第二个元素可以是字符串也可以是number，当为字符串的时候它指向菜单展开时使用的图标，当为number时，表示菜单展开和闭合时使用同一个图标，但展开时图标顺时针旋转一个角度，这个角度的值即为数组第二个元素的值。
 
 >icon 为数字时比较简单也好理解，下面我们举例详细说明下 icon 为数组时的各种情况。
 
@@ -124,7 +124,7 @@ mytree.vue 组件中的代码(xxxxxxxx/iconfont.css 即为下载的阿里巴巴�
 
 在 main.js 中插入下列代码(xxxxxxxxxxxxx 为闭合时的图标，yyyyyyyyyyyyyy 为展开时的图标，iconfont不可省略)：
 
-    import Listtree from 'v-listtree'
+    import Listtree from 'listtree'
 
     Vue.use(Listtree, {
       listData: require('../static/data.json'),
@@ -153,7 +153,7 @@ mytree.vue 组件中的代码(xxxxxxxx/iconfont.css 即为下载的阿里巴巴�
 
 在 main.js 中插入下列代码(xxxxxxxxxxxxx 为闭合时的图标，yyyyyyyyyyyyyy 为展开时的图标，fa不可省略)：
 
-    import Listtree from 'v-listtree'
+    import Listtree from 'listtree'
 
     Vue.use(Listtree, {
       listData: require('../static/data.json'),
@@ -181,7 +181,7 @@ mytree.vue 组件中的代码(xxxxxxxx/iconfont.css 即为下载的阿里巴巴�
 
 在 main.js 中插入下列代码(xxxxxxxxxxxxx 为闭合时的图标，yyyyyyyyyyyyyy 为展开时的图标)：
 
-    import Listtree from 'v-listtree'
+    import Listtree from 'listtree'
 
     Vue.use(Listtree, {
       listData: require('../static/data.json'),
@@ -206,9 +206,9 @@ mytree.vue 组件中的代码(xxxxxxxx/iconfont.css 即为下载的阿里巴巴�
 > animation 控制插件是否使用动画，默认值为true。当animation为true时，菜单展开闭合过程会有伸缩的一个动画，图标在菜单展开闭合过程中会有个旋转的动画（注：如果展开和闭合时不是同一个图标是不会产生旋转动画的）
 
 
-## v-listtree 样式命名规则
+## listtree 样式命名规则
 
-> 在 v-listtree 插件中每一级菜单及其图标都有自己的样式，如果你了解了这些样式的命名规则，你就可以为不同级的菜单定义不同的样式，甚至可以为任何一个菜单分支定义不同的样式
+> 在 listtree 插件中每一级菜单及其图标都有自己的样式，如果你了解了这些样式的命名规则，你就可以为不同级的菜单定义不同的样式，甚至可以为任何一个菜单分支定义不同的样式
 
 ### 1、菜单分支的index
 

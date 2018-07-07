@@ -66,9 +66,9 @@ listtree 是基于vue设计的无限级菜单插件，基本可以满足大部�
 
 > __name__ [String 必选]：为菜单的文字内容；
 
-> __parameter__ [String/Array/Object 可选]：当点击菜单时parameter会传递给外部组件，与菜单相关的一些数据（比如菜单分支对应的路由地址，在数据库中的id等）都可以放在parameter中，你可以在main.js文件中通过Vue.prototype.$listClick函数接收parameter数据并做一些相关的操作；
+> __parameter__ [String/Array/Object 可选]：当点击菜单时parameter会传递给外部组件，与菜单相关的一些数据（比如菜单分支对应的路由地址，在数据库中的id等）都可以放在 parameter 中，你可以在组件中通过创建 Vue.prototype.$listClick 函数接收 parameter 数据并做一些相关的操作；
 
-> __icon__ [Array 可选]：菜单分支前面的图标，这个后面介绍图标的时候会具体说明；
+> __icon__ [Array 可选]：菜单分支前面的图标（下图中的小三角即是）在这里可以自由定义，这个后面介绍图标的时候会具体说明；
 
 > __children__ [Array 可选]：菜单的子分支。
 
@@ -105,11 +105,11 @@ open 控制各菜单分支的默认展开闭合状态
 
 >icon 为数字时比较简单也好理解，下面我们举例详细说明下 icon 为数组时的各种情况。
 
-**a 使用阿里巴巴图标库图标** 我们假设你已经在阿里巴巴图标库创建了自己的项目并已经添加或上传了自己的图标，现在打开[阿里巴巴图标库](http://www.iconfont.cn)进入你的项目，选择 Font class，点击下载至本地，将其解压放到mytree.vue同一个文件夹下，如下图：
+**a 使用阿里巴巴图标库图标** 我们假设你已经在阿里巴巴图标库创建了自己的项目并已经添加或上传了自己的图标，现在打开[阿里巴巴图标库](http://www.iconfont.cn)进入你的项目，选择 Font class，点击下载至本地，将其解压放到mytree.vue同一个文件夹下，当然你也可以直接复制使用在线链接就不需要下载到本地了，如下图：
 
-<img src="https://github.com/wulin1978/vuetest/blob/master/static/iconfont1.png?raw=true">
+<img src="https://github.com/wlszl/listtree/blob/master/src/assets/alibaba.png?raw=true">
 
-mytree.vue 组件中的代码(xxxxxxxx/iconfont.css 即为下载的阿里巴巴图标库中的css文件)：
+mytree.vue 组件中的代码(xxxxxxxx/iconfont.css 即为下载的阿里巴巴图标库中的css文件，如果使用在线链接的话直接把url里面的内容换成在线链接的地址就可以了)：
 
     <template>
       <div class="hello">
@@ -195,7 +195,9 @@ mytree.vue 组件中的代码(xxxxxxxx/iconfont.css 即为下载的阿里巴巴�
 
 上面代码中icon也可以替换成：icon: ['../static/xxxxxxxxxxxxx', 90] ，此时表示菜单展开和闭合时图标都是 ../static/xxxxxxxxxxxxx，只是展开时图标顺时针旋转90度
 
-> 在icon里面设置的图标是单一的，也就是说所有的菜单分支图标都是一样的，如果你想要将某一个分支单独设置一个图标或者干脆让每个分支图标都不一样该怎么办呢，还记得前面提到过的 listtree 参数吗，listtree 元素里面有个icon属性，每个listtree 元素就代表一个菜单分支，设置某一分支的icon属性，该分支就拥有一个独立的图标。listtree 里面的icon数据类型是数组，同样该数组第一个元素代表的是菜单闭合时的图标，第二个元素如果是字符串代表的就是菜单展开时的图标，如果是数字代表的就是图标旋转的角度，此时菜单展开时的图标和闭合时的图标是一样的。listtree 元素里面有个icon属性和参数 icon 使用方法上都一样，它也可以使用阿里巴巴图标库、Font Awesome图标库和png、icon等格式图片作为图标。当然如果你不想在菜单里加任何的图标，可以将icon参数直接设为0就可以了。
+> 在icon里面设置的图标是单一的，也就是说所有的菜单分支图标都是一样的，如果你想要将某一个分支单独设置一个图标或者干脆让每个分支图标都不一样该怎么办呢，还记得前面提到过的 listData 参数吗，listData 元素里面有个icon属性，listData 每个元素都代表着一个菜单分支，设置某一分支的icon属性，该分支就拥有一个独立的图标。listData 里面的icon数据类型是数组，同样该数组第一个元素代表的是菜单闭合时的图标，第二个元素如果是字符串代表的就是菜单展开时的图标，如果是数字代表的就是图标旋转的角度，此时菜单展开时的图标和闭合时的图标是一样的。listData 元素里面有个icon属性和参数 icon 使用方法上都一样，它也可以使用阿里巴巴图标库、Font Awesome图标库和png、icon等格式图片作为图标。当然如果你不想在菜单里加任何的图标，可以将icon参数直接设为0就可以了。
+
+注：权重大小 listData中的icon > 参数icon，如果你设置了参数icon，同时某个分支对应的listData又设置了icon，那么该分支图标将显示listData中设置的icon
 
 ### 7、iconSize [Number 可选]
 
@@ -224,7 +226,19 @@ mytree.vue 组件中的代码(xxxxxxxx/iconfont.css 即为下载的阿里巴巴�
 
 ### 3、不同级别菜单分支的 className
 
-不同级别菜单分支的 className 等于 "lt-branch_level_" 加上该菜单的级别，比如每个一级菜单都包含一个样式："_lt-branch_level_1_"，每个二级菜单都包含一个样式："_lt-branch_level_2_" …… ，以此类推。同理不同级别菜单分支对应的图标的 className 等于 "lt-branch-icon_level_" 加上该菜单的级别。如果一个菜单分支没有子级菜单，该类菜单还拥有样式："_lt-branch_level_0_"，该类菜单的图标拥有样式："_lt-branch-icon_level_0_"。lt-branch-icon_level_0 和表示级别分支的 className 可同时存在。
+不同级别菜单分支的 className 等于 "lt-branch_level_" 加上该菜单的级别。不同级别菜单分支对应的图标的 className 等于 "lt-branch-icon_level_" 加上该菜单的级别。如果一个菜单分支没有子级菜单，该类菜单还拥有样式："_lt-branch_level_0_"，该类菜单的图标拥有样式："_lt-branch-icon_level_0_"。lt-branch-icon_level_0 和表示级别分支的 className 可同时存在。
+
+_lt-branch_level_1_         >>>>>>      一级菜单样式
+_lt-branch_level_2_         >>>>>>      二级菜单样式
+_lt-branch_level_3_         >>>>>>      三级菜单样式   ……
+
+_lt-branch-icon_level_1_    >>>>>>      一级菜单图标样式
+_lt-branch-icon_level_2_    >>>>>>      二级菜单图标样式
+_lt-branch-icon_level_3_    >>>>>>      三级菜单图标样式  ……
+
+_lt-branch_level_0_         >>>>>>      没有子级的菜单的样式
+_lt-branch-icon_level_0_    >>>>>>      没有子级的菜单图标的样式
+
 
 ### 4、菜单分支被点击后的 className
 

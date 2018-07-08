@@ -1,119 +1,618 @@
 [
   {
-    "name": "一级目录一",
+    "name": "基础",
     "children": [
       {
-        "name": "二级目录一",
+        "name": "介绍",
+        "parameter": "/abc",
         "children": [
           {
-            "name": "三级目录一",
+            "name": "Vue.js是什么",
+            "parameter": "/abc",
+            "children": []
+          },
+          {
+            "name": "起步",
+            "parameter": "/abc",
+            "children": []
+          },
+          {
+            "name": "声明式渲染",
+            "parameter": "/abc",
+            "children": []
+          },
+          {
+            "name": "条件与循环",
+            "parameter": "/abc",
+            "children": []
+          },
+          {
+            "name": "处理用户输入",
+            "parameter": "/abc",
+            "children": []
+          },
+          {
+            "name": "组件化应用构建",
+            "parameter": "/abc",
             "children": [
               {
-                "name": "四级目录一",
-                "parameter": 14
-              },
-              {
-                "name": "四级目录二",
-                "parameter": 15,
-                "children": [
-                  {
-                    "name": "五级目录一",
-                    "parameter": "/abc",
-                    "children": []
-                  }
-                ]
+                "name": "与自定义元素的关系",
+                "parameter": "/abc",
+                "children": []
               }
             ]
           },
           {
-            "name": "三级目录二",
-            "parameter": 4,
+            "name": "准备好了吗",
+            "parameter": "/abc",
             "children": []
           }
         ]
-      }
-    ]
-  },
-  {
-    "name": "一级目录二",
-    "parameter": 5,
-    "children": [
+      },
       {
-        "name": "二级目录二",
-        "parameter": 6,
+        "name": "Vue实例",
+        "parameter": "/abc",
         "children": [
           {
-            "name": "三级目录三",
-            "parameter": 7
+            "name": "创建一个Vue实例",
+            "parameter": "/abc",
+            "children": []
           },
           {
-            "name": "三级目录四",
-            "parameter": 8
+            "name": "数据与方法",
+            "parameter": "/abc",
+            "children": []
+          },
+          {
+            "name": "实例生命周期钩子",
+            "parameter": "/abc",
+            "children": []
+          },
+          {
+            "name": "生命周期图示",
+            "parameter": "/abc",
+            "children": []
           }
         ]
       },
       {
-        "name": "二级目录三",
-        "parameter": 9,
+        "name": "模板语法",
+        "parameter": "/abc",
         "children": [
           {
-            "name": "三级目录X",
-            "parameter": 10
-          }
-        ]
-      },
-      {
-        "name": "二级目录四",
-        "parameter": 11,
-        "children": [
-          {
-            "name": "三级目录Y",
-            "parameter": 12
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "name": "一级目录三",
-    "parameter": 13,
-    "children": [
-      {
-        "name": "二级目录五",
-        "parameter": 14,
-        "children": [
-          {
-            "name": "三级目录五",
+            "name": "插槽",
+            "parameter": "/abc",
             "children": [
               {
-                "name": "四级目录三",
-                "children": [
-                  {
-                    "name": "52",
-                    "parameter": "/abc",
-                    "children": [
-                      {
-                        "name": "61",
-                        "children":[
-                          {
-                            "name": "71",
-                            "children": [
-                              {
-                                "name": "81",
-                                "parameter": "/abc"
-                              }
-                            ]
-                          }
-                        ]
-                      }
-                    ]
-                  }
-                ]
+                "name": "文本",
+                "parameter": "/abc",
+                "children": []
+              },
+              {
+                "name": "原始HTML",
+                "parameter": "/abc",
+                "children": []
+              },
+              {
+                "name": "特性",
+                "parameter": "/abc",
+                "children": []
+              },
+              {
+                "name": "使用JavaScript表达式",
+                "parameter": "/abc",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "指令",
+            "parameter": "/abc",
+            "children": [
+              {
+                "name": "参数",
+                "parameter": "/abc",
+                "children": []
+              },
+              {
+                "name": "修饰符",
+                "parameter": "/abc",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "缩写",
+            "parameter": "/abc",
+            "children": [
+              {
+                "name": "v-bind缩写",
+                "parameter": "/abc",
+                "children": []
+              },
+              {
+                "name": "v-on缩写",
+                "parameter": "/abc",
+                "children": []
               }
             ]
           }
         ]
+      },
+      {
+        "name": "计算属性和侦听器",
+        "parameter": "/abc",
+        "children": [
+          {
+            "name": "计算属性",
+            "parameter": "/abc",
+            "children": [
+              {
+                "name": "基础例子",
+                "parameter": "/abc",
+                "children": []
+              },
+              {
+                "name": "计算属性缓存vs方法",
+                "parameter": "/abc",
+                "children": []
+              },
+              {
+                "name": "计算属性vs侦听属性",
+                "parameter": "/abc",
+                "children": []
+              },
+              {
+                "name": "计算属性的setter",
+                "parameter": "/abc",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "侦听器",
+            "parameter": "/abc",
+            "children": []
+          }
+        ]
+      },
+      {
+        "name": "Class与Style绑定",
+        "parameter": "/abc",
+        "children": [
+          {
+            "name": "绑定HTML Class",
+            "parameter": "/abc",
+            "children": [
+              {
+                "name": "对象语法",
+                "parameter": "/abc",
+                "children": []
+              },
+              {
+                "name": "数组语法",
+                "parameter": "/abc",
+                "children": []
+              },
+              {
+                "name": "用在组件上",
+                "parameter": "/abc",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "绑定内联样式",
+            "parameter": "/abc",
+            "children": [
+              {
+                "name": "对象语法",
+                "parameter": "/abc",
+                "children": []
+              },
+              {
+                "name": "数组语法",
+                "parameter": "/abc",
+                "children": []
+              },
+              {
+                "name": "自动添加前缀",
+                "parameter": "/abc",
+                "children": []
+              },
+              {
+                "name": "多重值",
+                "parameter": "/abc",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "条件渲染",
+        "parameter": "/abc",
+        "children": [
+          {
+            "name": "v-if",
+            "parameter": "/abc",
+            "children": [
+              {
+                "name": "在<template>元素上使用v-if条件渲染分组",
+                "parameter": "/abc",
+                "children": []
+              },
+              {
+                "name": "v-else",
+                "parameter": "/abc",
+                "children": []
+              },
+              {
+                "name": "v-else-if",
+                "parameter": "/abc",
+                "children": []
+              },
+              {
+                "name": "用key管理可复用的元素",
+                "parameter": "/abc",
+                "children": []
+              },
+              {
+                "name": "",
+                "parameter": "/abc",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "v-show",
+            "parameter": "/abc",
+            "children": []
+          },
+          {
+            "name": "v-if vs v-show",
+            "parameter": "/abc",
+            "children": []
+          },
+          {
+            "name": "v-if与v-for一起使用",
+            "parameter": "/abc",
+            "children": []
+          }
+        ]
+      },
+      {
+        "name": "列表渲染",
+        "parameter": "/abc",
+        "children": [
+          {
+            "name": "用v-for把一个数组对应为一组元素",
+            "parameter": "/abc",
+            "children": []
+          },
+          {
+            "name": "一个对象的v-for",
+            "parameter": "/abc",
+            "children": []
+          },
+          {
+            "name": "key",
+            "parameter": "/abc",
+            "children": []
+          },
+          {
+            "name": "数组更新检测",
+            "parameter": "/abc",
+            "children": [
+              {
+                "name": "变异方法",
+                "parameter": "/abc",
+                "children": []
+              },
+              {
+                "name": "替换数组",
+                "parameter": "/abc",
+                "children": []
+              },
+              {
+                "name": "注意事项",
+                "parameter": "/abc",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "对象更改检测注意事项",
+            "parameter": "/abc",
+            "children": []
+          },
+          {
+            "name": "显示过滤/排序结果",
+            "parameter": "/abc",
+            "children": []
+          },
+          {
+            "name": "一段取值范围的v-for",
+            "parameter": "/abc",
+            "children": []
+          },
+          {
+            "name": "v-for on a <template>",
+            "parameter": "/abc",
+            "children": []
+          },
+          {
+            "name": "v-for with v-if",
+            "parameter": "/abc",
+            "children": []
+          },
+          {
+            "name": "一个数组的v-for",
+            "parameter": "/abc",
+            "children": []
+          }
+        ]
+      },
+      {
+        "name": "事件处理",
+        "parameter": "/abc",
+        "children": [
+          {
+            "name": "监听事件",
+            "parameter": "/abc",
+            "children": []
+          },
+          {
+            "name": "事件处理方法",
+            "parameter": "/abc",
+            "children": []
+          },
+          {
+            "name": "内联处理器中的方法",
+            "parameter": "/abc",
+            "children": []
+          },
+          {
+            "name": "事件修饰符",
+            "parameter": "/abc",
+            "children": []
+          },
+          {
+            "name": "按键修饰符",
+            "parameter": "/abc",
+            "children": [
+              {
+                "name": "自动匹配按键修饰符",
+                "parameter": "/abc",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "系统修饰符",
+            "parameter": "/abc",
+            "children": [
+              {
+                "name": ".exact修饰符",
+                "parameter": "/abc",
+                "children": []
+              },
+              {
+                "name": "鼠标按钮修饰符",
+                "parameter": "/abc",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "为什么在HTML中监听事件",
+            "parameter": "/abc",
+            "children": []
+          }
+        ]
+      },
+      {
+        "name": "表单输入绑定",
+        "parameter": "/abc",
+        "children": [
+          {
+            "name": "基础用法",
+            "parameter": "/abc",
+            "children": [
+              {
+                "name": "文本",
+                "parameter": "/abc",
+                "children": []
+              },
+              {
+                "name": "多行文本",
+                "parameter": "/abc",
+                "children": []
+              },
+              {
+                "name": "复选框",
+                "parameter": "/abc",
+                "children": []
+              },
+              {
+                "name": "单选按钮",
+                "parameter": "/abc",
+                "children": []
+              },
+              {
+                "name": "选择框",
+                "parameter": "/abc",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "值绑定",
+            "parameter": "/abc",
+            "children": [
+              {
+                "name": "复选框",
+                "parameter": "/abc",
+                "children": []
+              },
+              {
+                "name": "单选按钮",
+                "parameter": "/abc",
+                "children": []
+              },
+              {
+                "name": "选择框的选项",
+                "parameter": "/abc",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "修饰符",
+            "parameter": "/abc",
+            "children": [
+              {
+                "name": ".lazy",
+                "parameter": "/abc",
+                "children": []
+              },
+              {
+                "name": ".number",
+                "parameter": "/abc",
+                "children": []
+              },
+              {
+                "name": ".trim",
+                "parameter": "/abc",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "在组件上使用v-model",
+            "parameter": "/abc",
+            "children": []
+          }
+        ]
+      },
+      {
+        "name": "组件基础",
+        "parameter": "/abc",
+        "children": []
       }
     ]
+  },
+  {
+    "name": "深入了解组件",
+    "children": [
+      {
+        "name": "组件注册",
+        "parameter": "/abc",
+        "children": []
+      },
+      {
+        "name": "Prop",
+        "parameter": "/abc",
+        "children": []
+      },
+      {
+        "name": "自定义事件",
+        "parameter": "/abc",
+        "children": []
+      },
+      {
+        "name": "插槽",
+        "parameter": "/abc",
+        "children": []
+      },
+      {
+        "name": "动态组件&异步组件",
+        "parameter": "/abc",
+        "children": []
+      },
+      {
+        "name": "处理边界情况",
+        "parameter": "/abc",
+        "children": []
+      }
+    ]
+  },
+  {
+    "name": "过渡&动画",
+    "children": [
+      {
+        "name": "进入/离开&列表过渡",
+        "parameter": "/abc",
+        "children": []
+      },
+      {
+        "name": "状态过渡",
+        "parameter": "/abc",
+        "children": []
+      }
+    ]
+  },
+  {
+    "name": "可复用性&组合",
+    "children": [
+      {
+        "name": "混入",
+        "parameter": "/abc",
+        "children": []
+      },
+      {
+        "name": "自定义指令",
+        "parameter": "/abc",
+        "children": []
+      },
+      {
+        "name": "渲染函数&JSX",
+        "parameter": "/abc",
+        "children": []
+      },
+      {
+        "name": "插件",
+        "parameter": "/abc",
+        "children": []
+      },
+      {
+        "name": "过滤器",
+        "parameter": "/abc",
+        "children": []
+      }
+    ]
+  },
+  {
+    "name": "工具",
+    "children": [
+      {
+        "name": "生产环境部署",
+        "parameter": "/abc",
+        "children": []
+      },
+      {
+        "name": "单文件组件",
+        "parameter": "/abc",
+        "children": []
+      },
+      {
+        "name": "单元测试",
+        "parameter": "/abc",
+        "children": []
+      },
+      {
+        "name": "TypeScript支持",
+        "parameter": "/abc",
+        "children": []
+      }
+    ]
+  },
+  {
+    "name": "模块化",
+    "children": []
+  },
+  {
+    "name": "内在",
+    "children": []
   }
 ]

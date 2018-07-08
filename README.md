@@ -1,6 +1,4 @@
-<span style="padding:10px">安装使用</span>
-<span style="padding:10px;background:#000;color:white;">参数说明</span>
-<span style="padding:10px;background:#000;color:white;">样式说明</span>
+| 安装使用 | 参数说明 | 样式说明 |
 
 # listtree —— vue无限级菜单
 

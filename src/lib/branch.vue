@@ -98,7 +98,9 @@ export default {
   },
   methods: {
     clickBranch (index, parameter) { // -----------------------------branch 点击事件--------------------------------
-      this.$listClick(parameter) // ----branch被点击时传递parameter给插件外的组件，插件外的组件通过给Vue的原型添加方法$listClick来获取参数parameter，并进行一系列的操作
+      if (typeof(this.$listClick) === "function") {
+        this.$listClick(parameter) // ----branch被点击时传递parameter给插件外的组件，插件外的组件通过给Vue的原型添加方法$listClick来获取参数parameter，并进行一系列的操作
+      }
 
       /* 如果没有动画，那么点击branch时直接就修改control值，否则就在执行完动画后在doAnimation中修改control值 */
       if (this.animation === false) {

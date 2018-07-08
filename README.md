@@ -226,24 +226,26 @@ mytree.vue 组件中的代码(xxxxxxxx/iconfont.css 即为下载的阿里巴巴�
 
 ### 3、不同级别菜单分支的 className
 
-不同级别菜单分支的 className 等于 "lt-branch_level_" 加上该菜单的级别。不同级别菜单分支对应的图标的 className 等于 "lt-branch-icon_level_" 加上该菜单的级别。如果一个菜单分支没有子级菜单，该类菜单还拥有样式："_lt-branch_level_0_"，该类菜单的图标拥有样式："_lt-branch-icon_level_0_"。lt-branch-icon_level_0 和表示级别分支的 className 可同时存在。
+不同级别菜单分支的 className 等于 "lt-branch_level_" 加上该菜单的级别。不同级别菜单分支对应的图标的 className 等于 "lt-branch-icon_level_" 加上该菜单的级别。如果一个菜单分支没有子级菜单，该类菜单还拥有样式："_lt-branch_level_0_"，该类菜单的图标拥有样式："_lt-branch-icon_level_0_"。lt-branch-icon_level_0 和表示级别分支的 className 可同时存在。如下：
+<div style="color:green;padding:20px">
+lt-branch_level_1         >>>>>>      一级菜单样式
+lt-branch_level_2         >>>>>>      二级菜单样式
+lt-branch_level_3         >>>>>>      三级菜单样式   ……
 
-_lt-branch_level_1_         >>>>>>      一级菜单样式<br>
-_lt-branch_level_2_         >>>>>>      二级菜单样式<br>
-_lt-branch_level_3_         >>>>>>      三级菜单样式   ……<br>
+lt-branch-icon_level_1    >>>>>>      一级菜单图标样式
+lt-branch-icon_level_2    >>>>>>      二级菜单图标样式
+lt-branch-icon_level_3    >>>>>>      三级菜单图标样式  ……
 
-_lt-branch-icon_level_1_    >>>>>>      一级菜单图标样式<br>
-_lt-branch-icon_level_2_    >>>>>>      二级菜单图标样式<br>
-_lt-branch-icon_level_3_    >>>>>>      三级菜单图标样式  ……<br>
-
-_lt-branch_level_0_         >>>>>>      没有子级的菜单的样式<br>
-_lt-branch-icon_level_0_    >>>>>>      没有子级的菜单图标的样式<br>
-
+lt-branch_level_0         >>>>>>      没有子级的菜单的样式
+lt-branch-icon_level_0    >>>>>>      没有子级的菜单图标的样式
+</div>
 
 ### 4、菜单分支被点击后的 className
 
 某个菜单分支被点击后会增加一个样式："_lt-branch_active_"，这个被点击的分支父级分支也会增加一个样式："_lt-branch_active_parent_"，同时这个被点击的分支所有祖先分支都会增加active样式，这些active样式名目规则是：如果祖先分支是一级分支，增加的样式名为："_lt-branch_level_1_active_"，如果祖先分支是二级分支，增加的样式名为："_lt-branch_level_2_active_" …… ，以此类推。lt-branch_active 和代表级别的active样式可同时存在，比如：点击一个二级分支，该二级分支会同时包含lt-branch_level_2_active 和 lt-branch_active 2个样式。同样，lt-branch_active_parent 和代表级别的active样式也可同时存在。
 
 同理，某个菜单分支被点击后其对应的图标也会增加一个样式："_lt-branch-icon_active_"，这个被点击的分支父级分支对应的图标增加一个样式："_lt-branch-icon_active_parent_"，其祖先分支对应的图标增加的样式为："_lt-branch-icon_level_1_active_"、 "_lt-branch-icon_level_2_active_"、 "_lt-branch-icon_level_3_active_" …… 。
+
+
 
 __注意：只有包含 parameter 的菜单分支被点击时才会增加 active 样式（还记得 listData 参数里的 parameter 属性吗）。__

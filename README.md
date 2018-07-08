@@ -1,9 +1,9 @@
 <table><tbody>
     <tr>
-        <td><font color="black">安装使用</font></td>
-        <td bgcolor="black"><font color="white">参数说明</font></td>
-        <td bgcolor="black"><font color="white">样式说明</font></td>
-        <td bgcolor="black"><font color="white">Demo</font></td>
+        <td bgcolor="AliceBlue"><font color="MidnightBlue">安装使用</font></td>
+        <td bgcolor="MidnightBlue"><font color="AliceBlue">参数说明</font></td>
+        <td bgcolor="MidnightBlue"><font color="AliceBlue">样式说明</font></td>
+        <td bgcolor="MidnightBlue"><font color="AliceBlue">Demo</font></td>
     </tr>
 </tbody></table>
 

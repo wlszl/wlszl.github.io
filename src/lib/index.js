@@ -1,4 +1,5 @@
 import ListTree from './tree'
+console.log('object')
 const tree = {
   install (Vue, o) {
     var ele = '.listtree'

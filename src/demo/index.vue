@@ -41,10 +41,11 @@
   background:rgb(231, 230, 230);
   font-size: 14px;
   line-height: 22px;
+  border-right:5px solid rgb(104, 102, 6);
+  overflow-Y: auto;
 }
 .right{
   margin-left:580px;
-  border-left:5px solid rgb(104, 102, 6);
   padding-top:12px;
 }
 .content{

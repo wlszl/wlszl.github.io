@@ -1,14 +1,21 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import Demo1 from './demo/demo1'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
+    {
+      path: '/',
+      component: (resolve) => require(['./App'], resolve),
+      // component: require('./App'),
+      name: 'app'
+    },
     {
       path: '/demo1',
       component: (resolve) => require(['./demo/demo1'], resolve),
+      // component: require('./demo/demo1'),
       name: 'demo1'
     }
   ]

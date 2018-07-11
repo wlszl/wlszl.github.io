@@ -256,11 +256,6 @@
                 "name": "用key管理可复用的元素",
                 "parameter": "/abc",
                 "children": []
-              },
-              {
-                "name": "",
-                "parameter": "/abc",
-                "children": []
               }
             ]
           },

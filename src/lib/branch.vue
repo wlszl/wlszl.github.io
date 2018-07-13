@@ -99,9 +99,9 @@ export default {
   methods: {
     clickBranch (index, parameter) { // -----------------------------branch 点击事件--------------------------------
       /* 如果没有动画，那么点击branch时直接就修改control值，否则就在执行完动画后在doAnimation中修改control值 */
+      console.log(index + '///')
       if (this.animation !== false) {
         this.doAnimation(this.getChildBranchIndex(index), index)
-        this.doRotate(index)
       } else {
         this.setControl(index)
       }
@@ -129,6 +129,9 @@ export default {
     },
     doAnimation (arr, index) { // ----------执行动画
       let elBox = document.getElementById('lt-branch-animation_' + index)
+      let elIcon = document.getElementById('lt-branch-icon_' + index)
+      if (elIcon) elIcon.style.transition = 'all .3s'
+
       if (elBox) {
         elBox.style.display = ''
         let enterLeave
@@ -139,10 +142,26 @@ export default {
             this.setControl(index)
             elBox.style.display = 'none'
           }, arr.length * 50 + 200)
+
+          if (elIcon) {
+            console.log('object')
+            setTimeout(() => {
+              elIcon.style.transform = elIcon.style.transform.replace(/rotate\(\d*deg\)/, '')
+              elIcon.style.transform += ' rotate(0deg)'
+            }, 0)
+          }
         } else if (this.control['lt-branch_' + index][0] === 'close' || this.control['lt-branch_' + index][0] === 0) {
           enterLeave = 'enter'
           this.setControl(index)
           elBox.style.display = ''
+
+          if (elIcon) {
+            setTimeout(() => {
+              elIcon.style.transform = elIcon.style.transform.replace(/rotate\(\d*deg\)/, '')
+              elIcon.style.transform += ` rotate(${parseInt(this.getIcon(index)[1])}deg)`
+            }, 0)
+          }
+
         }
         for (let n = 0; n < arr.length; n++) {
           let elBranch = document.getElementById('lt-branch_' + arr[n])
@@ -433,46 +452,47 @@ export default {
     //     }
     //   }
     // },
-    doRotate (index, direction) { // --------------------图标旋转动画，direction等于1表示顺时针旋转，等于-1表示逆时针旋转
-      let elIcon = document.getElementById('lt-branch-icon_' + index)
-      if (elIcon && this.animation !== false && !isNaN(parseInt(this.getIcon(index)[1])) && this.control['lt-branch_' + index][0] !== 'always') {
-        let transformIcon = elIcon.style.transform
-        let translateY = ''
-        let angle = 0
-        if (transformIcon.indexOf('translateY(-50%)') > -1) translateY = 'translateY(-50%)'
-        if (transformIcon.indexOf('rotate') > -1) {
-          angle = parseInt(transformIcon.split('rotate(')[1].split('deg)')[0])
-        }
-        if (!direction) {
-          if (this.control['lt-branch_' + index][0] === 'close' || this.control['lt-branch_' + index][0] === 0) {
-            direction = 1
-          } else if (this.control['lt-branch_' + index][0] === 'open' || this.control['lt-branch_' + index][0] === 1) {
-            direction = -1
-          }
-        }
+    // doRotate (index, direction) { // --------------------图标旋转动画，direction等于1表示顺时针旋转，等于-1表示逆时针旋转
+    //   console.log(index + '|||')
+    //   let elIcon = document.getElementById('lt-branch-icon_' + index)
+    //   if (elIcon && this.animation !== false && !isNaN(parseInt(this.getIcon(index)[1])) && this.control['lt-branch_' + index][0] !== 'always') {
+    //     let transformIcon = elIcon.style.transform
+    //     let translateY = ''
+    //     let angle = 0
+    //     if (transformIcon.indexOf('translateY(-50%)') > -1) translateY = 'translateY(-50%)'
+    //     if (transformIcon.indexOf('rotate') > -1) {
+    //       angle = parseInt(transformIcon.split('rotate(')[1].split('deg)')[0])
+    //     }
+    //     if (!direction) {
+    //       if (this.control['lt-branch_' + index][0] === 'close' || this.control['lt-branch_' + index][0] === 0) {
+    //         direction = 1
+    //       } else if (this.control['lt-branch_' + index][0] === 'open' || this.control['lt-branch_' + index][0] === 1) {
+    //         direction = -1
+    //       }
+    //     }
 
-        let maxAngle = parseInt(this.getIcon(index)[1]) // -----图标旋转所能达到的最大角度，即展开的时候图标需要旋转的角度
-        let rotateAngle = maxAngle / 10 // -----图标每次旋转的角度
+    //     let maxAngle = parseInt(this.getIcon(index)[1]) // -----图标旋转所能达到的最大角度，即展开的时候图标需要旋转的角度
+    //     let rotateAngle = maxAngle / 10 // -----图标每次旋转的角度
 
-        if (direction === 1) { // ---执行展开动画
-          elIcon.style.transform = `${translateY} rotate(${angle + rotateAngle}deg)`
-          if (parseInt(angle + rotateAngle) > maxAngle || parseInt(angle + rotateAngle) === maxAngle) { // -------如果elIcon旋转的角度大于等于maxAngle，把elIcon旋转的角度设为maxAngle，同时退出循环
-            elIcon.style.transform = `${translateY} rotate(${maxAngle}deg)`
-            return
-          }
-        } else {
-          elIcon.style.transform = `${translateY} rotate(${angle - rotateAngle}deg)`
-          if (parseInt(angle - rotateAngle) < 0 || parseInt(angle - rotateAngle) === 0) { // -------如果elIcon旋转的角度小于等于0，把elIcon旋转的角度设为0，同时退出循环（elIcon旋转的角度为0的时候即会到展开时图标的初始状态）
-            elIcon.style.transform = `${translateY} rotate(0deg)`
-            return
-          }
-        }
+    //     if (direction === 1) { // ---执行展开动画
+    //       elIcon.style.transform = `${translateY} rotate(${angle + rotateAngle}deg)`
+    //       if (parseInt(angle + rotateAngle) > maxAngle || parseInt(angle + rotateAngle) === maxAngle) { // -------如果elIcon旋转的角度大于等于maxAngle，把elIcon旋转的角度设为maxAngle，同时退出循环
+    //         elIcon.style.transform = `${translateY} rotate(${maxAngle}deg)`
+    //         return
+    //       }
+    //     } else {
+    //       elIcon.style.transform = `${translateY} rotate(${angle - rotateAngle}deg)`
+    //       if (parseInt(angle - rotateAngle) < 0 || parseInt(angle - rotateAngle) === 0) { // -------如果elIcon旋转的角度小于等于0，把elIcon旋转的角度设为0，同时退出循环（elIcon旋转的角度为0的时候即会到展开时图标的初始状态）
+    //         elIcon.style.transform = `${translateY} rotate(0deg)`
+    //         return
+    //       }
+    //     }
 
-        setTimeout(() => {
-          this.doRotate(index, direction)
-        }, this.animationTime)
-      }
-    }
+    //     setTimeout(() => {
+    //       this.doRotate(index, direction)
+    //     }, this.animationTime)
+    //   }
+    // }
   },
   computed: {
     branchIconBgStyle () { // ----图标背景层距离左边的距离，控制图标的位置

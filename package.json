@@ -1,11 +1,11 @@
 {
   "name": "v-listtree",
   "description": "A longitudinal menu of unlimited list",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "author": "wlszl <wulin2013@aliyun.com>",
   "license": "MIT",
   "private": false,
-  "main": "src/lib/index.js",
+  "main": "dist/build.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/wlszl/listtree"

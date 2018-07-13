@@ -13,8 +13,8 @@ Vue.use(Listtree, {
   listData,
   iconSize: 10,
   open: 1,
-  icon: 4,
-  animation: false
+  icon: 4
+  // animation: false
 })
 Vue.prototype.$listClick = (r) => {
   // console.log(r)

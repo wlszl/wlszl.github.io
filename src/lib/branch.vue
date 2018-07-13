@@ -98,10 +98,11 @@ export default {
   },
   methods: {
     clickBranch (index, parameter) { // -----------------------------branch 点击事件--------------------------------
+      if (this.control['lt-branch_' + index][0] === 'always') return false
       /* 如果没有动画，那么点击branch时直接就修改control值，否则就在执行完动画后在doAnimation中修改control值 */
-      console.log(index + '///')
       if (this.animation !== false) {
         this.doAnimation(this.getChildBranchIndex(index), index)
+        if (!isNaN(parseInt(this.getIcon[1]))) this.doRotate(index)
       } else {
         this.setControl(index)
       }
@@ -129,8 +130,6 @@ export default {
     },
     doAnimation (arr, index) { // ----------执行动画
       let elBox = document.getElementById('lt-branch-animation_' + index)
-      let elIcon = document.getElementById('lt-branch-icon_' + index)
-      if (elIcon) elIcon.style.transition = 'all .3s'
 
       if (elBox) {
         elBox.style.display = ''
@@ -142,26 +141,10 @@ export default {
             this.setControl(index)
             elBox.style.display = 'none'
           }, arr.length * 50 + 200)
-
-          if (elIcon) {
-            console.log('object')
-            setTimeout(() => {
-              elIcon.style.transform = elIcon.style.transform.replace(/rotate\(\d*deg\)/, '')
-              elIcon.style.transform += ' rotate(0deg)'
-            }, 0)
-          }
         } else if (this.control['lt-branch_' + index][0] === 'close' || this.control['lt-branch_' + index][0] === 0) {
           enterLeave = 'enter'
           this.setControl(index)
           elBox.style.display = ''
-
-          if (elIcon) {
-            setTimeout(() => {
-              elIcon.style.transform = elIcon.style.transform.replace(/rotate\(\d*deg\)/, '')
-              elIcon.style.transform += ` rotate(${parseInt(this.getIcon(index)[1])}deg)`
-            }, 0)
-          }
-
         }
         for (let n = 0; n < arr.length; n++) {
           let elBranch = document.getElementById('lt-branch_' + arr[n])
@@ -186,6 +169,23 @@ export default {
               }, 50 * n)
             }
           }
+        }
+      }
+    },
+    doRotate (index) { // -------图标旋转动画
+      let elIcon = document.getElementById('lt-branch-icon_' + index)
+      if (elIcon) {
+        elIcon.style.transition = 'all .3s'
+        if (this.control['lt-branch_' + index][0] === 'open' || this.control['lt-branch_' + index][0] === 1) { // --当前为展开状态则将要执行的是收缩动画
+          setTimeout(() => {
+            elIcon.style.transform = elIcon.style.transform.replace(/rotate\(\d*deg\)/, '')
+            elIcon.style.transform += ' rotate(0deg)'
+          }, 0)
+        } else if (this.control['lt-branch_' + index][0] === 'close' || this.control['lt-branch_' + index][0] === 0) {
+          setTimeout(() => {
+            elIcon.style.transform = elIcon.style.transform.replace(/rotate\(\d*deg\)/, '')
+            elIcon.style.transform += ` rotate(${parseInt(this.getIcon(index)[1])}deg)`
+          }, 0)
         }
       }
     },
@@ -570,7 +570,7 @@ export default {
   left: 0;
 }
 .enter-start {
-  transform:translateX(-2500px);
+  transform:translateX(-25px);
   opacity: 0;
   transition: all .3s;
 }
@@ -584,7 +584,7 @@ export default {
   transition: all .3s;
 }
 .leave-end {
-  transform:translateX(-2500px);
+  transform:translateX(-25px);
   opacity: 0;
 }
 </style>

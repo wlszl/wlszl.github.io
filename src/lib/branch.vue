@@ -5,24 +5,21 @@
     <!-- 层的编号（index）设计规则：一级分支用一个数字表示，二级用2个数字中间连一个“-”表示，三级分支用三个数字，每个数字中间连“-”……，比如：A-B-C-D-……，其中A表示所属一级分支编号，B表示所属二级分支编号，C表示所属三级分支编号……； -->
     <!-- id 前缀命名规则：branch的前缀为 lt-branch_ ，图标层的前缀为 lt-branch-icon_ ，图标基座的前缀为 lt-branch-icon-bg_ ，animation(动画)层前缀为：lt-branch-animation_，box层的前缀为 lt-branch-box_ 。层的 id 就是：前缀+编号 -->
     <!-- className 规则：所有分支branch都含有 lt-branch，所有的图标都包含：lt-branch-icon；所有一级分支都包含 lt-branch_level_1，二级分支包含：lt-branch_level_2，三级分支包含：lt-branch_level_3……；所有一级分支图标都包含：lt-branch-icon_level_1，所有二级分支图标包含：lt-branch-icon_level_2，所有三级图标包含：lt-branch-icon_level_3……，如果一个分支下面没有下级分支，那么该分支将包含：lt-branch-icon_level_0；当前被点击的分支包含：lt-branch_active，当前被点击的分支图标包含：lt-branch-icon_active，一级分支下级子孙分支被点击后该一级分支将包含：lt-branch_level_1_active，该一级分支的图标将包含： lt-branch-icon_level_1_active，二级分支下级子孙分支被点击后该二级分支将包含：lt-branch_level_2_active，该二级分支的图标将包含： lt-branch-icon_level_2_active，三级分支下级子孙分支被点击后该三级分支将包含：lt-branch_level_3_active，该三级分支的图标将包含： lt-branch-icon_level_3_active……。后面带有active的分支表示正在活动的分支，但只有点击可以打开新路由内容的branch（即在listData中该branch包含parameter属性）才能触发active。 -->
-    <a :href="item.parameter">
-      <transition>
-      <div :id="'lt-branch_'+(branchLevel+(index+1))"
-           :data-index="branchLevel+(index+1)"
-           :class="branchClassName(branchLevel+(index+1))"
-           :style="branchStyle(branchLevel+(index+1))"
-           @click.prevent="clickBranch(branchLevel+(index+1), item.parameter)">
-        <div :id="'lt-branch-icon-bg_'+(branchLevel+(index+1))"
-             class='lt-branch-icon-Bg'
-             :style="branchIconBgStyle"
-             v-if="(getIcon(branchLevel+(index+1))&&item.children&&item.children.length>0)||(item.icon!==undefined&&item.icon.length===2)">
-          <span :id="'lt-branch-icon_'+(branchLevel+(index+1))"
-                :class='branchIconClassName(branchLevel+(index+1))'
-                :style="branchIconStyle(branchLevel+(index+1))"
-                v-if="(control['lt-branch-icon_'+(branchLevel+(index+1))]==='show')||(item.icon!==undefined&&item.icon.length===2)"></span>
-        </div><span>{{item.name}}</span>
-      </div></transition>
-    </a>
+    <div :id="'lt-branch_'+(branchLevel+(index+1))"
+         :data-index="branchLevel+(index+1)"
+         :class="branchClassName(branchLevel+(index+1))"
+         :style="branchStyle(branchLevel+(index+1))"
+         @click.prevent="clickBranch(branchLevel+(index+1), item.parameter)">
+      <div :id="'lt-branch-icon-bg_'+(branchLevel+(index+1))"
+           class='lt-branch-icon-Bg'
+           :style="branchIconBgStyle"
+           v-if="(getIcon(branchLevel+(index+1))&&item.children&&item.children.length>0)||(item.icon!==undefined&&item.icon.length===2)">
+        <span :id="'lt-branch-icon_'+(branchLevel+(index+1))"
+              :class='branchIconClassName(branchLevel+(index+1))'
+              :style="branchIconStyle(branchLevel+(index+1))"
+              v-if="(control['lt-branch-icon_'+(branchLevel+(index+1))]==='show')||(item.icon!==undefined&&item.icon.length===2)"></span>
+      </div><span>{{item.name}}</span>
+    </div>
     <!--=============== animation ================= 每个branch下都有个animation层，是用来实现伸缩动画的 -->
     <div v-if="item.children&&item.children.length>0"
          :id="'lt-branch-animation_'+(branchLevel+(index+1))"
@@ -101,21 +98,21 @@ export default {
   },
   methods: {
     clickBranch (index, parameter) { // -----------------------------branch 点击事件--------------------------------
-      this.doAnimation(this.getChildBranchIndex(index), index)
+      /* 如果没有动画，那么点击branch时直接就修改control值，否则就在执行完动画后在doAnimation中修改control值 */
+      if (this.animation !== false) {
+        this.doAnimation(this.getChildBranchIndex(index), index)
+        this.doRotate(index)
+      } else {
+        this.setControl(index)
+      }
       if (typeof(this.$listClick) === "function") {
         this.$listClick(parameter) // ----branch被点击时传递parameter给插件外的组件，插件外的组件通过给Vue的原型添加方法$listClick来获取参数parameter，并进行一系列的操作
       }
 
-      /* 如果没有动画，那么点击branch时直接就修改control值，否则就在执行完动画后在doAnimation中修改control值 */
-      if (this.animation === false) {
-        if (parameter) {
-          this.$emit('sendClickBranchIndex', index)
-        }
-      } else {
-        if (parameter) {
-          this.$emit('sendClickBranchIndex', index)
-        }
+      if (parameter) {
+        this.$emit('sendClickBranchIndex', index)
       }
+      return false
     },
     getChildBranchIndex (index) { // ----- 获取子分支index，用于动画展现（只获取显示的子分支，隐藏状态的不获取）
       let n = 1
@@ -134,27 +131,43 @@ export default {
       let elBox = document.getElementById('lt-branch-animation_' + index)
       if (elBox) {
         elBox.style.display = ''
-        let elBoxDisplay = ''
-        let enterLeaver
+        let enterLeave
         if (this.control['lt-branch_' + index][0] === 'open' || this.control['lt-branch_' + index][0] === 1) { // --当前为展开状态则将要执行的是收缩动画
           arr = arr.reverse() // -----反转数组，即动画从最后一个子分支开始执行
-          enterLeaver = 'leaver'
-          elBoxDisplay ='none'
-        } else {
-          enterLeaver = 'enter'
+          enterLeave = 'leave'
+          setTimeout(() => {
+            this.setControl(index)
+            elBox.style.display = 'none'
+          }, arr.length * 50 + 200)
+        } else if (this.control['lt-branch_' + index][0] === 'close' || this.control['lt-branch_' + index][0] === 0) {
+          enterLeave = 'enter'
+          this.setControl(index)
+          elBox.style.display = ''
         }
         for (let n = 0; n < arr.length; n++) {
-          document.getElementById('lt-branch_' + arr[n]).className += ' ' + enterLeaver + '-start'
-          if (typeof arr[n] === 'string') {
-            setTimeout(() => {
-              document.getElementById('lt-branch_' + arr[n]).className += ' ' + enterLeaver + '-end'
-            }, 80 * n)
+          let elBranch = document.getElementById('lt-branch_' + arr[n])
+          if (elBranch) {
+            elBranch.className = elBranch.className.replace(' enter-start', '').replace(' leave-start', '').replace(' enter-end', '').replace(' leave-end', '')
+            if (enterLeave === 'leave') elBranch.className += ' leave-start' // ----展开的动画起始样式在这里，为了避免display的干扰收缩的动画样式必须在display改变之后
+            elBranch.style.display = enterLeave === 'leave' ? 'block' : 'none'
+            if (typeof arr[n] === 'string') {
+              setTimeout(() => { // -----相邻的分支之间执行动画相隔80微秒
+                if (enterLeave === 'leave') {
+                  elBranch.className += ' leave-end'
+                  setTimeout(() => {
+                    elBranch.style.display = 'none' // ---用setTimeout是因为必须在展开动画执行完后才隐藏分支，同时也能避免display的改变对展开动画的干扰
+                  }, 300)
+                } else if (enterLeave === 'enter') {
+                  elBranch.style.display = 'block'
+                  elBranch.className += ' enter-start' // ----- 收缩的动画放在这里开始是为了避免display的干扰
+                  setTimeout(() => {
+                    elBranch.className += ' enter-end' // ----这里如果不用setTimeout的话css3动画不能执行
+                  }, 100)
+                }
+              }, 50 * n)
+            }
           }
         }
-        setTimeout(() => {
-          elBox.style.display = elBoxDisplay
-          this.setControl(index)
-        }, arr.length * 80)
       }
     },
     setControl (index) { // -----设置this.control['lt-branch_' + index][0]的值，该值决定branch是展开还是闭合
@@ -420,46 +433,46 @@ export default {
     //     }
     //   }
     // },
-    // doRotate (index, direction) { // --------------------图标旋转动画，direction等于1表示顺时针旋转，等于-1表示逆时针旋转
-    //   let elIcon = document.getElementById('lt-branch-icon_' + index)
-    //   if (elIcon && this.animation !== false && !isNaN(parseInt(this.getIcon(index)[1])) && this.control['lt-branch_' + index][0] !== 'always') {
-    //     let transformIcon = elIcon.style.transform
-    //     let translateY = ''
-    //     let angle = 0
-    //     if (transformIcon.indexOf('translateY(-50%)') > -1) translateY = 'translateY(-50%)'
-    //     if (transformIcon.indexOf('rotate') > -1) {
-    //       angle = parseInt(transformIcon.split('rotate(')[1].split('deg)')[0])
-    //     }
-    //     if (!direction) {
-    //       if (this.control['lt-branch_' + index][0] === 'close' || this.control['lt-branch_' + index][0] === 0) {
-    //         direction = 1
-    //       } else if (this.control['lt-branch_' + index][0] === 'open' || this.control['lt-branch_' + index][0] === 1) {
-    //         direction = -1
-    //       }
-    //     }
+    doRotate (index, direction) { // --------------------图标旋转动画，direction等于1表示顺时针旋转，等于-1表示逆时针旋转
+      let elIcon = document.getElementById('lt-branch-icon_' + index)
+      if (elIcon && this.animation !== false && !isNaN(parseInt(this.getIcon(index)[1])) && this.control['lt-branch_' + index][0] !== 'always') {
+        let transformIcon = elIcon.style.transform
+        let translateY = ''
+        let angle = 0
+        if (transformIcon.indexOf('translateY(-50%)') > -1) translateY = 'translateY(-50%)'
+        if (transformIcon.indexOf('rotate') > -1) {
+          angle = parseInt(transformIcon.split('rotate(')[1].split('deg)')[0])
+        }
+        if (!direction) {
+          if (this.control['lt-branch_' + index][0] === 'close' || this.control['lt-branch_' + index][0] === 0) {
+            direction = 1
+          } else if (this.control['lt-branch_' + index][0] === 'open' || this.control['lt-branch_' + index][0] === 1) {
+            direction = -1
+          }
+        }
 
-    //     let maxAngle = parseInt(this.getIcon(index)[1]) // -----图标旋转所能达到的最大角度，即展开的时候图标需要旋转的角度
-    //     let rotateAngle = maxAngle / 10 // -----图标每次旋转的角度
+        let maxAngle = parseInt(this.getIcon(index)[1]) // -----图标旋转所能达到的最大角度，即展开的时候图标需要旋转的角度
+        let rotateAngle = maxAngle / 10 // -----图标每次旋转的角度
 
-    //     if (direction === 1) { // ---执行展开动画
-    //       elIcon.style.transform = `${translateY} rotate(${angle + rotateAngle}deg)`
-    //       if (parseInt(angle + rotateAngle) > maxAngle || parseInt(angle + rotateAngle) === maxAngle) { // -------如果elIcon旋转的角度大于等于maxAngle，把elIcon旋转的角度设为maxAngle，同时退出循环
-    //         elIcon.style.transform = `${translateY} rotate(${maxAngle}deg)`
-    //         return
-    //       }
-    //     } else {
-    //       elIcon.style.transform = `${translateY} rotate(${angle - rotateAngle}deg)`
-    //       if (parseInt(angle - rotateAngle) < 0 || parseInt(angle - rotateAngle) === 0) { // -------如果elIcon旋转的角度小于等于0，把elIcon旋转的角度设为0，同时退出循环（elIcon旋转的角度为0的时候即会到展开时图标的初始状态）
-    //         elIcon.style.transform = `${translateY} rotate(0deg)`
-    //         return
-    //       }
-    //     }
+        if (direction === 1) { // ---执行展开动画
+          elIcon.style.transform = `${translateY} rotate(${angle + rotateAngle}deg)`
+          if (parseInt(angle + rotateAngle) > maxAngle || parseInt(angle + rotateAngle) === maxAngle) { // -------如果elIcon旋转的角度大于等于maxAngle，把elIcon旋转的角度设为maxAngle，同时退出循环
+            elIcon.style.transform = `${translateY} rotate(${maxAngle}deg)`
+            return
+          }
+        } else {
+          elIcon.style.transform = `${translateY} rotate(${angle - rotateAngle}deg)`
+          if (parseInt(angle - rotateAngle) < 0 || parseInt(angle - rotateAngle) === 0) { // -------如果elIcon旋转的角度小于等于0，把elIcon旋转的角度设为0，同时退出循环（elIcon旋转的角度为0的时候即会到展开时图标的初始状态）
+            elIcon.style.transform = `${translateY} rotate(0deg)`
+            return
+          }
+        }
 
-    //     setTimeout(() => {
-    //       this.doRotate(index, direction)
-    //     }, this.animationTime)
-    //   }
-    // }
+        setTimeout(() => {
+          this.doRotate(index, direction)
+        }, this.animationTime)
+      }
+    }
   },
   computed: {
     branchIconBgStyle () { // ----图标背景层距离左边的距离，控制图标的位置
@@ -537,17 +550,21 @@ export default {
   left: 0;
 }
 .enter-start {
+  transform:translateX(-2500px);
   opacity: 0;
-  transition: opacity .5s;
+  transition: all .3s;
 }
-.enter-end /* .fade-leave-active below version 2.1.8 */ {
+.enter-end {
+  transform:translateX(0px);
   opacity: 1;
 }
 .leave-start {
+  transform:translateX(0px);
   opacity: 1;
-  transition: opacity .5s;
+  transition: all .3s;
 }
-.leave-end /* .fade-leave-active below version 2.1.8 */ {
+.leave-end {
+  transform:translateX(-2500px);
   opacity: 0;
 }
 </style>

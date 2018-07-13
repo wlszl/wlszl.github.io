@@ -12,7 +12,7 @@ import listData from './listdata.json'
 Vue.use(Listtree, {
   listData,
   iconSize: 10,
-  open: 0
+  open: 1
 })
 Vue.prototype.$listClick = (r) => {
   console.log(r)

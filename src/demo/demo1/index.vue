@@ -36,6 +36,7 @@ export default {
 <style>
 .lt-branch{
   margin: 14px 0px;
+  background: #fff;
 }
 .lt-branch span{
   color: #7f8c8d;

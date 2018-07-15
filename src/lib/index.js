@@ -1,5 +1,4 @@
 import ListTree from './tree'
-console.log('object')
 const tree = {
   install (Vue, o) {
     var ele = '.listtree'
@@ -23,6 +22,15 @@ const tree = {
   }
 }
 if (typeof window !== 'undefined' && window.Vue) {
-  window.Vue.use(tree)
+  window.Vue.use(tree, {
+    listData,
+    open,
+    openOnly,
+    indent,
+    spacing,
+    icon,
+    iconSize,
+    animation
+  })
 }
 export default tree

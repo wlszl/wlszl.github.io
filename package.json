@@ -1,7 +1,7 @@
 {
   "name": "listtree",
   "description": "A longitudinal menu of unlimited list",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "author": "wlszl <wulin2013@aliyun.com>",
   "license": "MIT",
   "private": false,
@@ -16,7 +16,9 @@
   },
   "dependencies": {
     "listtree": "^1.2.1",
-    "vue": "^2.5.11"
+    "v-listtree": "^1.2.8",
+    "vue": "^2.5.11",
+    "vue-router": "^3.0.1"
   },
   "browserslist": [
     "> 1%",

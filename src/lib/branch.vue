@@ -101,7 +101,9 @@ export default {
       if (this.control['lt-branch_' + index][0] === 'always') return false
       /* 如果没有动画，那么点击branch时直接就修改control值，否则就在执行完动画后在doAnimation中修改control值 */
       if (this.animation !== false) {
-        this.doAnimation(this.getChildBranchIndex(index), index)
+        // this.doAnimation(this.getChildBranchIndex(index), index)
+        if (this.animation === 1) {this.doAnimation(this.getChildBranchIndex(index), index)}
+        else {this.doAnimation2(this.getChildBranchIndex(index), index)}
         if (!isNaN(parseInt(this.getIcon[1]))) this.doRotate(index)
       } else {
         this.setControl(index)
@@ -149,24 +151,54 @@ export default {
         for (let n = 0; n < arr.length; n++) {
           let elBranch = document.getElementById('lt-branch_' + arr[n])
           if (elBranch) {
-            elBranch.className = elBranch.className.replace(' enter-start', '').replace(' leave-start', '').replace(' enter-end', '').replace(' leave-end', '')
-            if (enterLeave === 'leave') elBranch.className += ' leave-start' // ----展开的动画起始样式在这里，为了避免display的干扰收缩的动画样式必须在display改变之后
+            elBranch.className = elBranch.className.replace(' branch-enter-start', '').replace(' branch-leave-start', '').replace(' branch-enter-end', '').replace(' branch-leave-end', '')
+            if (enterLeave === 'leave') elBranch.className += ' branch-leave-start' // ----展开的动画起始样式在这里，为了避免display的干扰收缩的动画样式必须在display改变之后
             elBranch.style.display = enterLeave === 'leave' ? 'block' : 'none'
             if (typeof arr[n] === 'string') {
               setTimeout(() => { // -----相邻的分支之间执行动画相隔80微秒
                 if (enterLeave === 'leave') {
-                  elBranch.className += ' leave-end'
+                  elBranch.className += ' branch-leave-end'
                   setTimeout(() => {
                     elBranch.style.display = 'none' // ---用setTimeout是因为必须在展开动画执行完后才隐藏分支，同时也能避免display的改变对展开动画的干扰
                   }, 300)
                 } else if (enterLeave === 'enter') {
                   elBranch.style.display = 'block'
-                  elBranch.className += ' enter-start' // ----- 收缩的动画放在这里开始是为了避免display的干扰
+                  elBranch.className += ' branch-enter-start' // ----- 收缩的动画放在这里开始是为了避免display的干扰
                   setTimeout(() => {
-                    elBranch.className += ' enter-end' // ----这里如果不用setTimeout的话css3动画不能执行
+                    elBranch.className += ' branch-enter-end' // ----这里如果不用setTimeout的话css3动画不能执行
                   }, 100)
                 }
               }, 50 * n)
+            }
+          }
+        }
+      }
+    },
+    doAnimation2 (arr, index) { // ----------执行动画
+      let elBox = document.getElementById('lt-branch-animation_' + index)
+
+      if (elBox) {
+        elBox.style.display = ''
+        let branchDisplay
+        if (this.control['lt-branch_' + index][0] === 'open' || this.control['lt-branch_' + index][0] === 1) { // --当前为展开状态则将要执行的是收缩动画
+          setTimeout(() => {
+            this.setControl(index)
+          }, arr.length * 30 + 200)
+          branchDisplay = 'none'
+        } else if (this.control['lt-branch_' + index][0] === 'close' || this.control['lt-branch_' + index][0] === 0) {
+          arr = arr.reverse()
+          branchDisplay = 'block'
+          this.setControl(index)
+        }
+        for (let n = 0; n < arr.length; n++) {
+          let elBranch = document.getElementById('lt-branch_' + arr[n])
+          elBranch.style.display = branchDisplay === 'none' ? 'block' : 'none'
+          if (elBranch) {
+            if (typeof arr[n] === 'string') {
+              console.log(50 * n)
+              setTimeout(() => { // -----相邻的分支之间执行动画相隔30微秒
+                elBranch.style.display = branchDisplay
+              }, 30 * n)
             }
           }
         }
@@ -569,21 +601,21 @@ export default {
   top: 50%;
   left: 0;
 }
-.enter-start {
+.branch-enter-start {
   transform:translateX(-25px);
   opacity: 0;
   transition: all .3s;
 }
-.enter-end {
+.branch-enter-end {
   transform:translateX(0px);
   opacity: 1;
 }
-.leave-start {
+.branch-leave-start {
   transform:translateX(0px);
   opacity: 1;
   transition: all .3s;
 }
-.leave-end {
+.branch-leave-end {
   transform:translateX(-25px);
   opacity: 0;
 }

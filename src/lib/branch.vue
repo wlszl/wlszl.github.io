@@ -111,6 +111,9 @@ export default {
       if (typeof(this.$listClick) === "function") {
         this.$listClick(parameter) // ----branch被点击时传递parameter给插件外的组件，插件外的组件通过给Vue的原型添加方法$listClick来获取参数parameter，并进行一系列的操作
       }
+      if (typeof(this.$listMouseOver) === "function") {
+        this.$listMouseOver(parameter) // ----鼠标经过branch时传递parameter给插件外的组件，插件外的组件通过给Vue的原型添加方法$listMouseOver 来获取参数parameter，并进行一系列的操作
+      }
 
       if (parameter) {
         this.$emit('sendClickBranchIndex', index)

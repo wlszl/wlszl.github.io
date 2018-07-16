@@ -14,9 +14,10 @@ listtree 是基于vue2.x的无限级菜单插件，基本可以满足大部分�
 
     import Vue from 'vue'
     import Listtree from 'listtree'
+    import listData from './listdata.json'
 
     Vue.use(Listtree, {
-      listData: require('./listdata.json'),
+      listData
     })
 
     /* $listClick 和 $listMouseOver 非必要

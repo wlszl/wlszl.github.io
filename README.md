@@ -18,11 +18,19 @@ listtree 是基于vue2.x的无限级菜单插件，基本可以满足大部分�
     Vue.use(Listtree, {
       listData: require('./listdata.json'),
     })
+
+    /* $listClick 和 $listMouseOver 非必要
     Vue.prototype.$listClick = (parameter) => {
       if (parameter !== undefined) {
         // 当点击菜单时你希望系统做的事情可以写在这里（比如路由跳转）
       }
     }
+    Vue.prototype.$listMouseOver = (parameter) => {
+      if (parameter !== undefined) {
+        // 当鼠标经过菜单时你希望系统做的事情可以写在这里
+      }
+    }
+     */
 
 > 在需要插入菜单的地方插入下面代码：
 

@@ -5,7 +5,7 @@
   "author": "wlszl <wulin2013@aliyun.com>",
   "license": "MIT",
   "private": false,
-  "main": "dist/build.js",
+  "main": "src/lib",
   "repository": {
     "type": "git",
     "url": "https://github.com/wlszl/listtree"
@@ -15,10 +15,7 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
-    "listtree": "^1.2.1",
-    "v-listtree": "^1.2.8",
-    "vue": "^2.5.11",
-    "vue-router": "^3.0.1"
+    "vue": "^2.5.11"
   },
   "browserslist": [
     "> 1%",

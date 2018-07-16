@@ -100,11 +100,11 @@ export default {
     clickBranch (index, parameter) { // -----------------------------branch 点击事件--------------------------------
       if (this.control['lt-branch_' + index][0] === 'always') return false
       /* 如果没有动画，那么点击branch时直接就修改control值，否则就在执行完动画后在doAnimation中修改control值 */
-      if (this.animation !== false) {
+      if (!isNaN(parseInt(this.animation)) && this.animation > 0) {
         // this.doAnimation(this.getChildBranchIndex(index), index)
         if (this.animation === 1) {this.doAnimation(this.getChildBranchIndex(index), index)}
-        else {this.doAnimation2(this.getChildBranchIndex(index), index)}
-        if (!isNaN(parseInt(this.getIcon[1]))) this.doRotate(index)
+        else if (this.animation === 2) {this.doAnimation2(this.getChildBranchIndex(index), index)}
+        this.doRotate(index)
       } else {
         this.setControl(index)
       }

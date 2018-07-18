@@ -52,6 +52,9 @@
 .content{
   display:none;
   margin-left:12px;
+  border:2px solid rgb(3, 67, 119);
+  background:white;
+  color:rgb(58, 58, 58);
 }
 .router-link-active .content{
   display:block;

@@ -8,6 +8,7 @@
             :arrowLeft="arrowLeft"
             :arrowSize="arrowSize"
             :animation="animation"
+            :eventArea="eventArea"
             :clickBranchIndex="clickBranchIndex"
             @sendClickBranchIndex="getClickBranchIndex"></branch>
   </div>
@@ -25,7 +26,7 @@ export default {
       clickBranchIndex: '' // -----------被点击的分支index，当用户点击branch时赋值
     }
   },
-  props: ['listData', 'open', 'openOnly', 'indent', 'arrow', 'arrowLeft', 'arrowSize', 'animation'],
+  props: ['listData', 'open', 'openOnly', 'indent', 'arrow', 'arrowLeft', 'arrowSize', 'animation', 'eventArea'],
   methods: {
     getClickBranchIndex (index) {
       this.clickBranchIndex = index

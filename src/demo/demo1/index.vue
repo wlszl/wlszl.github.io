@@ -23,7 +23,8 @@ Vue.use(Listtree, {
   arrow: 0,
   indent: 18,
   open:['always', 0, 1],
-  animation: 1
+  animation: 1,
+  eventArea:'content'
 })
 
 Vue.prototype.$listClick = (r) => {

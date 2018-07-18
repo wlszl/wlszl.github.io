@@ -9,8 +9,8 @@
          :data-index="branchLevel+(index+1)"
          :class="branchClassName(branchLevel+(index+1))"
          :style="branchStyle(branchLevel+(index+1))"
-         @click.prevent="clickBranch(branchLevel+(index+1), item.parameter)"
-         @mouseover.prevent='MouseOverBranch(item.parameter)'>
+         @click.prevent="clickBranch(branchLevel+(index+1), item.parameter, 'line')"
+         @mouseover.prevent="MouseOverBranch(item.parameter, 'line')">
       <div :id="'lt-branch-arrow-bg_'+(branchLevel+(index+1))"
            class='lt-branch-arrow-bg'
            :style="brancharrowBgStyle"
@@ -24,7 +24,8 @@
            v-if="item.icon&&item.icon!==''"
            :class="item.icon+' lt-branch-icon'"
            :style="branchIconStyle"></div>
-      <span>{{item.name}}</span>
+      <span @click.prevent="clickBranch(branchLevel+(index+1), item.parameter, 'content')"
+            @mouseover.prevent="MouseOverBranch(item.parameter, 'content')">{{item.name}}</span>
     </div>
     <!--=============== animation ================= 每个branch下都有个animation层，是用来实现伸缩动画的 -->
     <div v-if="item.children&&item.children.length>0"
@@ -41,6 +42,7 @@
                 :arrowLeft="arrowLeft"
                 :arrowSize="arrowSize"
                 :animation="animation"
+                :eventArea="eventArea"
                 :clickBranchIndex="clickBranchIndex"
                 @sendClickBranchIndex="getClickBranchIndex"
                 :branchLevel="branchLevel+(index+1)+'-'"
@@ -100,15 +102,20 @@ export default {
     },
     animation: { // ---animation设为false时不使用动画
       default: 1
+    },
+    eventArea: { // ----事件区域，eventArea有2个值分别为'line'和'content'，值为'line'时表示鼠标点击或经过菜单分支所在行时触发Vue.prototype.$listClick和Vue.prototype.$listMouseOver；值为'content'时表示鼠标点击或经过菜单分支文字内容时触发Vue.prototype.$listClick和Vue.prototype.$listMouseOver。
+      default: 'line'
     }
   },
   methods: {
-    MouseOverBranch (parameter) { // -----------------------------鼠标经过 branch-------------------------------
+    MouseOverBranch (parameter, eventArea) { // -----------------------------鼠标经过 branch-------------------------------
+      if (eventArea !== this.eventArea) return false
       if (typeof(this.$listMouseOver) === "function") {
         this.$listMouseOver(parameter) // ----鼠标经过branch时传递parameter给插件外的组件，插件外的组件通过给Vue的原型添加方法$listMouseOver 来获取参数parameter，并进行一系列的操作
       }
     },
-    clickBranch (index, parameter) { // -----------------------------branch 点击事件--------------------------------
+    clickBranch (index, parameter, eventArea) { // -----------------------------branch 点击事件--------------------------------
+      if (eventArea !== this.eventArea) return false
       if (this.control['lt-branch_' + index][0] === 'always') return false
       /* 如果没有动画，那么点击branch时直接就修改control值，否则就在执行完动画后在doAnimation中修改control值 */
       if (!isNaN(parseInt(this.animation)) && this.animation > 0) {

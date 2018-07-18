@@ -13,7 +13,8 @@ const tree = {
       arrow: o.arrow,
       arrowSize: o.arrowSize,
       arrowLeft: o.arrowLeft,
-      animation: o.animation
+      animation: o.animation,
+      eventArea: o.eventArea
     }})
     setTimeout(() => {
       listtree.$mount('.listtree')

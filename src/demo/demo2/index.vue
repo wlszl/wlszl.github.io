@@ -43,12 +43,13 @@
   padding-left:30px;
   background:rgb(48, 65, 86);
   color:rgb(191, 203, 217);
+  cursor: pointer;
 }
 .lt-branch:hover{
   background:rgb(38, 52, 69);
 }
 .lt-branch span{
-  margin-left: 15px;
+  margin-left: 30px;
 }
 .lt-branch-icon{
   color:#ccc;

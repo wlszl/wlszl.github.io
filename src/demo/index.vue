@@ -40,7 +40,7 @@
           <h3>6. 菜单展开和闭合动画非渐隐渐现（默认的动画效果在这里体验明显不好）</h3>
           <span>  实现方法：设置参数 animation 值为2。</span>
           <h3>7. 调整图标与文字之间的距离</h3>
-          <span>  实现方法：在样式 .lt-branch span 中设置 left 属性(这里需加 !important)。</span>
+          <span>  实现方法：在样式 .lt-branch span 中设置 margin-left 属性。</span>
         </div>
       </router-link>
   </div>

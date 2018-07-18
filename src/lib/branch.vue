@@ -25,7 +25,8 @@
            :class="item.icon+' lt-branch-icon'"
            :style="branchIconStyle"></div>
       <span @click.prevent="clickBranch(branchLevel+(index+1), item.parameter, 'content')"
-            @mouseover.prevent="MouseOverBranch(item.parameter, 'content')">{{item.name}}</span>
+            @mouseover.prevent="MouseOverBranch(item.parameter, 'content')"
+            :style="branchSpanStyle(item.icon)">{{item.name}}</span>
     </div>
     <!--=============== animation ================= 每个branch下都有个animation层，是用来实现伸缩动画的 -->
     <div v-if="item.children&&item.children.length>0"
@@ -334,7 +335,7 @@ export default {
 
       return arrow // -----不管用户是使用系统默认图标、自定义图片还是使用第三方图标或者在listData中定义图标，arrow都为数组，数组第一个元素为展开时的图标，第二个元素为闭合时图标（数组元素可能是图片地址，也可能是代表第三方图标的className）
     },
-    arrowCloseStyle (index) { // -----图标闭合时的样式
+    arrowCloseStyle (index) { // -----箭头图标闭合时的样式
       if (this.getArrow(index)[0].indexOf('/') > -1) { // -----------this.getArrow中的元素包含“/”说明用户使用自定义图片作为图标
         return `position: absolute;
                 top: 0;
@@ -350,7 +351,7 @@ export default {
                 transform: translateY(-50%);`
       }
     },
-    arrowOpenStyle (index) { // -----图标展开时的样式
+    arrowOpenStyle (index) { // -----箭头图标展开时的样式
       if (isNaN(parseInt(this.getArrow(index)[1]))) { // ---如果this.getArrow(index)第二个元素不是纯数字，它一定是与第一个元素代表完全不一样的图片或className。
         if (this.getArrow(index)[0].indexOf('/') > -1) { // -----------this.getArrow中的元素包含“/”说明用户使用自定义图片作为图标
           return `position: absolute;
@@ -377,14 +378,14 @@ export default {
                 ${transform}`
       }
     },
-    arrowCloseClassName (index) { // ----------闭合时图标层的className
+    arrowCloseClassName (index) { // ----------闭合时箭头图标层的className
       if (!this.getArrow(index)) return ''
       if (this.getArrow(index)[0].indexOf('/') === -1) { // ---如果图标使用的不是图片（图片地址一定含有“/”）
         return this.getArrow(index)[0]
       }
       return ''
     },
-    arrowOpenClassName (index) { // ----------展开时图标层的className
+    arrowOpenClassName (index) { // ----------展开时箭头图标层的className
       if (!this.getArrow(index)) return ''
       if (isNaN(parseInt(this.getArrow(index)[1])) && this.getArrow(index)[1].toString().indexOf('/') === -1) { // ---如果this.getArrow(index)第二个元素不是纯数字并且图标使用的不是图片（图片地址一定含有“/”）
         return this.getArrow(index)[1]
@@ -393,7 +394,7 @@ export default {
       }
       return ''
     },
-    branchArrowStyle (index) { // ---------------------------------图标的样式-------------------------
+    branchArrowStyle (index) { // ---------------------------------箭头图标的样式-------------------------
       let elIndex = document.getElementById('lt-branch-arrow_' + index)
       let arrowStyle = 'display:inline-block;'
       if (this.arrow === 0) return arrowStyle
@@ -407,7 +408,7 @@ export default {
       }
       return arrowStyle
     },
-    branchArrowClassName (index) { // ---------------图标的className(当使用默认图标或第三方图标库时需要设定className)-------------------
+    branchArrowClassName (index) { // ---------------箭头图标的className(当使用默认图标或第三方图标库时需要设定className)-------------------
       let arrowClass = ''
       if (this.control['lt-branch_' + index][0] === 'open' || this.control['lt-branch_' + index][0] === 'always' || this.control['lt-branch_' + index][0] === 1) {
         arrowClass += this.arrowOpenClassName(index)
@@ -443,6 +444,12 @@ export default {
         arrowClass += ' lt-branch-arrow_active_parent'
       }
       return arrowClass
+    },
+    branchSpanStyle (icon) {
+      let theStyle = ''
+      if (icon && icon !== '') theStyle = 'left:30px;'
+      return `position:relative;
+              ${theStyle}`
     },
     branchAnimationStyle (id) { // ----animation的样式
       let theStyle = ''

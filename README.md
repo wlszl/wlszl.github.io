@@ -41,7 +41,7 @@ listtree 是基于vue2.x的无限级菜单插件，基本可以满足大部分�
 > 其中listdata.json是菜单的数据内容，下面讲参数时会具体说明。
 ## 参数
 
-> listtree 一共有8个参数：listData、open、openOnly、indent、arrow、arrowSize、animation、eventArea，通过配置这8个参数可以使 listtree 适应不同类型的菜单需求，为了描述方便，这里假设你要插入本插件的组件为mytree.vue(建议用空组件来引入本插件，然后在需要使用本本插件的地方直接import该组件)
+> listtree 一共有9个参数：listData、open、openOnly、indent、arrow、arrowSize、arrowLeft、animation、eventArea，通过配置这9个参数可以使 listtree 适应不同类型的菜单需求，为了描述方便，这里假设你要插入本插件的组件为mytree.vue(建议用空组件来引入本插件，然后在需要使用本本插件的地方直接import该组件)
 
 | 参数 | 属性 | 默认值 | 可能的值 | 描述 |
 | ---- | ------ | :------: | :-----: | ------- |
@@ -50,6 +50,7 @@ listtree 是基于vue2.x的无限级菜单插件，基本可以满足大部分�
 | openOnly | 可选 | 0 | 0/1 | openOnly控制菜单的展开方式，openOnly 为 1 的时候同级别菜单分支在同一时间只能展开一个分支，不同级别的分支互相不受影响。 |
 | indent  | 可选 | 24 | —— | indent 控制上下级菜单缩进距离，单位为 px。当 indent 为 0 时， 上下级菜单没有缩进，所有菜单分支左边对齐。|
 | arrow  | 可选 | 1 | 0~10/数组 | arrow 控制每个菜单分支前面的箭头图标样式，插件自带10个箭头样式，也可以使用阿里巴巴图标库的图标和Font Awesome图标库图标，arrow 为0时表示不使用箭头。 |
+| arrowLeft | 可选 | —— | —— | arrowLeft 用来控制箭头图标的与边框的距离，单位为px。如果arrowLeft为正数表示与左边的距离为arrowLeft，如果arrowLeft为负数，表示箭头与右边款的距离为arrowLeft的绝对值。|
 | arrowSize | 可选 | —— | —— | arrowSize 用来控制箭头图标的尺寸，单位为px。如果没有设置该值，也可以通过设置样式lt-branch-arrow里的font-size来控制箭头尺寸。|
 | animation | 可选 | 1 | 0/1/2 | animation 控制插件是否使用动画以及使用哪种动画，值为 0 时表示不使用动画，值为 1 或 2 时表示插件展开和闭合时使用动画，目前插件支持2种动画形式。|
 | eventArea | 可选 | 'line' | 'line'/'content' | eventArea 控制鼠标点击或经过菜单分支某区域时触发事件，值为'line'时该区域为菜单分支所在行，值为'content'时该区域为菜单分支文字内容。|
@@ -213,15 +214,19 @@ xxxxxxxxxxxxx 为闭合时的图标，yyyyyyyyyyyyyy 为展开时的图标。代
 
 注：权重大小 listData中的arrow > 参数arrow，如果你设置了参数arrow，同时某个分支对应的listData又设置了arrow，那么该分支图标将显示listData中设置的arrow
 
-### 6、arrowSize [Number 可选]
+### 6、arrowLeft [Number 可选]
 
-> arrowSize 控制图标的尺寸，单位为px，该参数没有默认值，如果你没有设置该值，则图标大小会被与之最近的fong-size控制，因为这里的图标本质上也是一种字体（用图片作为图标的除外），所以你也可以通过设置font-size的值来控制图标尺寸。但当图标为图片时，arrowSize和font-size对图标无效。
+> arrowLeft 控制箭头图标的左边距，单位为px，如果 arrowLeft 值为负数，箭头图标将出现在菜单的右侧，箭头图标与右边框的距离为 arrowLeft 的绝对值。
 
-### 7、animation [Number 1 可选]
+### 7、arrowSize [Number 可选]
+
+> arrowSize 控制箭头图标的尺寸，单位为px，该参数没有默认值，如果没有设置该值，则图标大小会由与之最近的fong-size控制，因为这里的图标本质上也是一种字体（用图片作为图标的除外），所以你也可以通过设置样式lt-branch-arrow中的font-size的值来控制箭头图标尺寸。但当图标为图片时，arrowSize和font-size对图标无效。
+
+### 8、animation [Number 1 可选]
 
 > animation 控制插件是否使用动画，值为 0 时表示不使用动画，值为 1 或 2 时表示插件展开和闭合时使用动画，目前插件支持2种动画形式。默认值为1。
 
-### 8、eventArea [String "line" 可选]
+### 9、eventArea [String "line" 可选]
 
 > 事件区域，eventArea有2个值分别为'line'和'content'，值为'line'时表示鼠标点击或经过菜单分支所在行时触发Vue.prototype.$listClick和Vue.prototype.$listMouseOver；值为'content'时表示鼠标点击或经过菜单分支文字内容时触发Vue.prototype.$listClick和Vue.prototype.$listMouseOver
 
@@ -284,4 +289,4 @@ xxxxxxxxxxxxx 为闭合时的图标，yyyyyyyyyyyyyy 为展开时的图标。代
 
 __注意：只有包含 parameter 的菜单分支被点击时才会增加 active 样式（还记得 listData 参数里的 parameter 属性吗）。__
 
-__以上所有涉及到的样式都可以在引入插件的组件中定义，但有个前提，style 属性不能设置 scoped__
+__以上所有涉及到的样式都可以在引入插件的组件中定义，但有个前提，style 属性不能设置为 scoped__

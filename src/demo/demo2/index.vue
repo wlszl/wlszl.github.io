@@ -49,7 +49,7 @@
   background:rgb(38, 52, 69);
 }
 .lt-branch span{
-  margin-left: 30px;
+  left: 40px !important;
 }
 .lt-branch-icon{
   color:#ccc;

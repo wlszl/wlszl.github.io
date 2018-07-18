@@ -41,13 +41,18 @@ listtree 是基于vue2.x的无限级菜单插件，基本可以满足大部分�
 > 其中listdata.json是菜单的数据内容，下面讲参数时会具体说明。
 ## 参数
 
-> listtree 一共有9个参数：listData、open、openOnly、indent、spacing、arrow、arrowSize、animation、eventArea，通过配置这9个参数可以使 listtree 适应不同类型的菜单需求，为了描述方便，这里假设你要插入本插件的组件为mytree.vue(建议用空组件来引入本插件，然后在需要使用本本插件的地方直接import该组件)
+> listtree 一共有8个参数：listData、open、openOnly、indent、arrow、arrowSize、animation、eventArea，通过配置这8个参数可以使 listtree 适应不同类型的菜单需求，为了描述方便，这里假设你要插入本插件的组件为mytree.vue(建议用空组件来引入本插件，然后在需要使用本本插件的地方直接import该组件)
 
 | 参数 | 属性 | 默认值 | 可能的值 | 描述 |
-| ---- | ------ | ------ | :-----: | ------- |
-| listData | 必选 | —— | —— | 包含了所有菜单分支中的必要数据，listData 中每个元素代表一个分支，每个分支包含4个属性：name、icon、parameter、children |
-| open | 可选 | 1 | 0/1/'always'/数组 | open 控制各菜单分支的默认展开闭合状态 |
+| ---- | ------ | :------: | :-----: | ------- |
+| listData | 必选 | —— | —— | 包含了所有菜单分支中的必要数据，listData 中每个元素代表一个菜单分支，每个分支包含4个属性：name、icon、parameter、children |
+| open | 可选 | 1 | 0/1/'always'/数组 | open 控制各菜单分支的默认展开闭合状态，0表示所有菜单初始状态为闭合状态，1表示所有菜单初始状态为展开状态， |
 | openOnly | 可选 | 0 | 0/1 | openOnly控制菜单的展开方式，openOnly 为 1 的时候同级别菜单分支在同一时间只能展开一个分支，不同级别的分支互相不受影响。 |
+| indent  | 可选 | 24 | —— | indent 控制上下级菜单缩进距离，单位为 px。当 indent 为 0 时， 上下级菜单没有缩进，所有菜单分支左边对齐。|
+| arrow  | 可选 | 1 | 0~10/数组 | arrow 控制每个菜单分支前面的箭头图标样式，插件自带10个箭头样式，也可以使用阿里巴巴图标库的图标和Font Awesome图标库图标，arrow 为0时表示不使用箭头。 |
+| arrowSize | 可选 | —— | —— | arrowSize 用来控制箭头图标的尺寸，单位为px。如果没有设置该值，也可以通过设置样式lt-branch-arrow里的font-size来控制箭头尺寸。|
+| animation | 可选 | 1 | 0/1/2 | animation 控制插件是否使用动画以及使用哪种动画，值为 0 时表示不使用动画，值为 1 或 2 时表示插件展开和闭合时使用动画，目前插件支持2种动画形式。|
+| eventArea | 可选 | 'line' | 'line'/'content' | eventArea 控制鼠标点击或经过菜单分支某区域时触发事件，值为'line'时该区域为菜单分支所在行，值为'content'时该区域为菜单分支文字内容。|
 
 ### 1、listData [Array 必选]
 

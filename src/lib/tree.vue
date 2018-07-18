@@ -4,9 +4,9 @@
             :open="open"
             :openOnly="openOnly"
             :indent="indent"
-            :spacing="spacing"
-            :icon="icon"
-            :iconSize="iconSize"
+            :arrow="arrow"
+            :arrowLeft="arrowLeft"
+            :arrowSize="arrowSize"
             :animation="animation"
             :clickBranchIndex="clickBranchIndex"
             @sendClickBranchIndex="getClickBranchIndex"></branch>
@@ -25,7 +25,7 @@ export default {
       clickBranchIndex: '' // -----------被点击的分支index，当用户点击branch时赋值
     }
   },
-  props: ['listData', 'open', 'openOnly', 'indent', 'spacing', 'icon', 'iconSize', 'animation'],
+  props: ['listData', 'open', 'openOnly', 'indent', 'arrow', 'arrowLeft', 'arrowSize', 'animation'],
   methods: {
     getClickBranchIndex (index) {
       this.clickBranchIndex = index
@@ -56,8 +56,8 @@ export default {
     //       /* 创建目录 */
     //       let link
     //       let par = document.createElement('div')
-    //       let iconDiv = document.createElement('div')
-    //       par.appendChild(iconDiv)
+    //       let arrowDiv = document.createElement('div')
+    //       par.appendChild(arrowDiv)
     //       let node = document.createTextNode(x[n].name)
     //       if (!x[n].childer || x[n].childer.length === 0) {
     //         link = document.createElement('a')
@@ -70,35 +70,35 @@ export default {
     //       par.style.paddingLeft = this.indentLetter + 10 + 'px'
     //       par.style.marginBottom = this.branchSpace + 'px'
 
-    //       let iconDivClassName = 'iconDiv'
-    //       /* 当this.ifIcon为true表示目录前要带有图标，则将图标div显示，并且根据customIcon值判断是否使用自定义图标，使用自定义图标则图标div使用className为coutomIconDivOpen或者coutomIconDivClose，不使用自定义图标则图标div使用className为iconDivOpen或者iconDivClose */
-    //       if (this.ifIcon) {
-    //         iconDiv.style.display = ''
-    //         if (_this.customIcon.length === 0) {
-    //           iconDivClassName = 'iconDiv'
+    //       let arrowDivClassName = 'arrowDiv'
+    //       /* 当this.ifarrow为true表示目录前要带有图标，则将图标div显示，并且根据customarrow值判断是否使用自定义图标，使用自定义图标则图标div使用className为coutomarrowDivOpen或者coutomarrowDivClose，不使用自定义图标则图标div使用className为arrowDivOpen或者arrowDivClose */
+    //       if (this.ifarrow) {
+    //         arrowDiv.style.display = ''
+    //         if (_this.customarrow.length === 0) {
+    //           arrowDivClassName = 'arrowDiv'
     //         } else {
-    //           iconDivClassName = 'coutomIconDiv'
+    //           arrowDivClassName = 'coutomarrowDiv'
     //         }
     //       } else { // 否则表示目录前不带有图标则将图标div隐藏
-    //         iconDiv.style.display = 'none'
+    //         arrowDiv.style.display = 'none'
     //       }
 
     //       /* 当open等于1时，设定所有目录初始状态都是展开的 */
     //       if (_this.open === 1) {
     //         par.className = 'par' + openr
-    //         iconDiv.className = iconDivClassName + 'Open'
-    //         if (_this.customIcon.length !== 0) {
-    //           iconDiv.style.backgroundImage = 'url(' + _this.customIcon[1] + ')'
-    //           iconDiv.style.backgroundRepeat = 'no-repeat'
-    //           iconDiv.style.backgroundPosition = 'center center'
+    //         arrowDiv.className = arrowDivClassName + 'Open'
+    //         if (_this.customarrow.length !== 0) {
+    //           arrowDiv.style.backgroundImage = 'url(' + _this.customarrow[1] + ')'
+    //           arrowDiv.style.backgroundRepeat = 'no-repeat'
+    //           arrowDiv.style.backgroundPosition = 'center center'
     //         }
     //       } else { // 当open不等于1时，设定所有目录初始状态都是关闭的
     //         par.className = 'par' + closer
-    //         iconDiv.className = iconDivClassName + 'Close'
-    //         if (_this.customIcon.length !== 0) {
-    //           iconDiv.style.backgroundImage = 'url(' + _this.customIcon[0] + ')'
-    //           iconDiv.style.backgroundRepeat = 'no-repeat'
-    //           iconDiv.style.backgroundPosition = 'center center'
+    //         arrowDiv.className = arrowDivClassName + 'Close'
+    //         if (_this.customarrow.length !== 0) {
+    //           arrowDiv.style.backgroundImage = 'url(' + _this.customarrow[0] + ')'
+    //           arrowDiv.style.backgroundRepeat = 'no-repeat'
+    //           arrowDiv.style.backgroundPosition = 'center center'
     //         }
     //       }
 
@@ -111,7 +111,7 @@ export default {
     //       parent.appendChild(box)
 
     //       /* 设置子目录左边框相对于父目录左边框的缩进距离 */
-    //       box.style.paddingLeft = this.indentIcon + 'px'
+    //       box.style.paddingLeft = this.indentarrow + 'px'
 
     //       /* child等于1的时候表示该目录下还有子目录，child等于0时表示该目录为底目录，下面已经没有子目录了。点击底目录可打开新的页面内容，点击非底目录则显示或隐藏下面的子目录 */
     //       let child
@@ -119,7 +119,7 @@ export default {
     //         child = 1
     //       } else {
     //         child = 0
-    //         iconDiv.style.display = 'none'
+    //         arrowDiv.style.display = 'none'
     //       }
 
     //       /* 当open不等于1时隐藏box，即隐藏子目录，换句话说就是关闭所有目录 */
@@ -129,15 +129,15 @@ export default {
     //       /* 当open等于3或4时，展开一级目录（arr.length与目录级别一致）*/
     //       if ((_this.open === 3 || _this.open === 4) && arr.length === 1) {
     //         par.className = par.className.replace(closer, openr)
-    //         iconDiv.className = iconDivClassName + 'Open'
-    //         if (_this.customIcon.length !== 0) {
-    //           iconDiv.style.backgroundImage = 'url(' + _this.customIcon[1] + ')'
-    //           iconDiv.style.backgroundRepeat = 'no-repeat'
-    //           iconDiv.style.backgroundPosition = 'center center'
+    //         arrowDiv.className = arrowDivClassName + 'Open'
+    //         if (_this.customarrow.length !== 0) {
+    //           arrowDiv.style.backgroundImage = 'url(' + _this.customarrow[1] + ')'
+    //           arrowDiv.style.backgroundRepeat = 'no-repeat'
+    //           arrowDiv.style.backgroundPosition = 'center center'
     //         }
     //         box.style.display = ''
     //         if (_this.open === 4 && arr.length === 1) {
-    //           iconDiv.style.display = 'none'
+    //           arrowDiv.style.display = 'none'
     //         }
     //       }
 
@@ -147,11 +147,11 @@ export default {
     //         if (_this.open === 2 && par.className.indexOf(closer) !== -1) {
     //           for (let k = 0; k < ellist.length; k++) {
     //             ellist[k].par.className = ellist[k].par.className.replace(openr, closer)
-    //             ellist[k].iconDiv.className = iconDivClassName + 'Close'
-    //             if (_this.customIcon.length !== 0) {
-    //               ellist[k].iconDiv.style.backgroundImage = 'url(' + _this.customIcon[0] + ')'
-    //               ellist[k].iconDiv.style.backgroundRepeat = 'no-repeat'
-    //               ellist[k].iconDiv.style.backgroundPosition = 'center center'
+    //             ellist[k].arrowDiv.className = arrowDivClassName + 'Close'
+    //             if (_this.customarrow.length !== 0) {
+    //               ellist[k].arrowDiv.style.backgroundImage = 'url(' + _this.customarrow[0] + ')'
+    //               ellist[k].arrowDiv.style.backgroundRepeat = 'no-repeat'
+    //               ellist[k].arrowDiv.style.backgroundPosition = 'center center'
     //             }
     //             ellist[k].box.style.display = 'none'
     //           }
@@ -162,19 +162,19 @@ export default {
     //           box.style.display = box.style.display === 'none' ? '' : 'none'
     //           if (par.className.indexOf(openr) !== -1) {
     //             par.className = par.className.replace(openr, closer)
-    //             iconDiv.className = iconDivClassName + 'Close'
-    //             if (_this.customIcon.length !== 0) {
-    //               iconDiv.style.backgroundImage = 'url(' + _this.customIcon[0] + ')'
-    //               iconDiv.style.backgroundRepeat = 'no-repeat'
-    //               iconDiv.style.backgroundPosition = 'center center'
+    //             arrowDiv.className = arrowDivClassName + 'Close'
+    //             if (_this.customarrow.length !== 0) {
+    //               arrowDiv.style.backgroundImage = 'url(' + _this.customarrow[0] + ')'
+    //               arrowDiv.style.backgroundRepeat = 'no-repeat'
+    //               arrowDiv.style.backgroundPosition = 'center center'
     //             }
     //           } else if (par.className.indexOf(closer) !== -1) {
     //             par.className = par.className.replace(closer, openr)
-    //             iconDiv.className = iconDivClassName + 'Open'
-    //             if (_this.customIcon.length !== 0) {
-    //               iconDiv.style.backgroundImage = 'url(' + _this.customIcon[1] + ')'
-    //               iconDiv.style.backgroundRepeat = 'no-repeat'
-    //               iconDiv.style.backgroundPosition = 'center center'
+    //             arrowDiv.className = arrowDivClassName + 'Open'
+    //             if (_this.customarrow.length !== 0) {
+    //               arrowDiv.style.backgroundImage = 'url(' + _this.customarrow[1] + ')'
+    //               arrowDiv.style.backgroundRepeat = 'no-repeat'
+    //               arrowDiv.style.backgroundPosition = 'center center'
     //             }
     //           }
     //         }
@@ -221,7 +221,7 @@ export default {
     //       }
     //       let theel = {
     //         par,
-    //         iconDiv,
+    //         arrowDiv,
     //         box,
     //         child,
     //         arr: thearr

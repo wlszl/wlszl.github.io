@@ -10,9 +10,9 @@ const tree = {
       open: o.open,
       openOnly: o.openOnly,
       indent: o.indent,
-      spacing: o.spacing,
-      icon: o.icon,
-      iconSize: o.iconSize,
+      arrow: o.arrow,
+      arrowSize: o.arrowSize,
+      arrowLeft: o.arrowLeft,
       animation: o.animation
     }})
     setTimeout(() => {

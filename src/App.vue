@@ -11,7 +11,8 @@ import listData from './listdata.json'
 
 Vue.use(Listtree, {
   listData,
-  iconSize: 10,
+  arrowSize: 10,
+  // arrowLeft: -8,
   open: 1,
   icon: 4
   // animation: false

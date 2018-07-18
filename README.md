@@ -2,7 +2,7 @@
 # listtree —— vue无限级菜单
 [![](https://img.shields.io/badge/npm-v1.2.8-brightgreen.svg)](https://www.npmjs.com/package/listtree) [![](https://img.shields.io/badge/license-MIT-blue.svg)](https://www.npmjs.com/package/listtree)
 
-listtree 是基于vue2.x的无限级菜单插件，基本可以满足大部分纵列多级别菜单的需求，并且用户定义菜单样式的自由度非常高，具体到每一级别的菜单甚至每一个菜单分支的单独样式都可以自由定义，和自己写css样式没有任何区别。菜单前的小图标可以使用系统默认的图标，也可以使用阿里巴巴图标库和Font Awesome图标库里的图标，当然你也可以使用自己设计的png、icon等格式的图标。
+listtree 是基于vue2.x的无限级菜单插件，基本可以满足大部分纵列多级别菜单的需求，并且用户定义菜单样式的自由度非常高，具体到每一级别的菜单甚至每一个菜单分支的单独样式都可以自由定义，和自己写css样式没有任何区别。菜单前的小图标可以使用系统默认的图标，也可以使用阿里巴巴图标库和Font Awesome图标库里的图标，当然你也可以使用自己设计的png、arrow等格式的图标。
 
 ## 安装
 
@@ -41,7 +41,7 @@ listtree 是基于vue2.x的无限级菜单插件，基本可以满足大部分�
 > 其中listdata.json是菜单的数据内容，下面讲参数时会具体说明。
 ## 参数
 
-> listtree 一共有8个参数：listData、open、openOnly、indent、spacing、icon、iconSize、animation，通过配置这8个参数可以使 listtree 适应不同类型的菜单需求，为了描述方便，这里假设你要插入本插件的组件为mytree.vue(建议用空组件来引入本插件，然后在需要使用本本插件的地方直接import该组件)
+> listtree 一共有8个参数：listData、open、openOnly、indent、spacing、arrow、arrowSize、animation，通过配置这8个参数可以使 listtree 适应不同类型的菜单需求，为了描述方便，这里假设你要插入本插件的组件为mytree.vue(建议用空组件来引入本插件，然后在需要使用本本插件的地方直接import该组件)
 
 ### 1、listData [Array 必选]
 
@@ -73,7 +73,7 @@ listtree 是基于vue2.x的无限级菜单插件，基本可以满足大部分�
       }
     ]
 
-菜单分支四个属性：
+菜单分支listData四个属性：
 
 > __name__ [String 必选]：为菜单的文字内容；
 
@@ -110,11 +110,11 @@ open 控制各菜单分支的默认展开闭合状态
 
 > spacing 控制图标与菜单文字之间的间距，单位为 px。的默认值为20px。
 
-### 6、icon [Number/Array 1 可选]
+### 6、arrow [Number/Array 1 可选]
 
-> icon 控制图标样式，它可以是数字，也可以是数组。当 icon 为数字时，图标显示的是 listtree 提供的图标样式，目前提供 1 到 10 十种样式。当图标为数组时，用户可以从阿里巴巴图标库或Font Awesome图标库选择图标，也可以使用png、icon等图片格式的图标。数组的第一个元素数据类型是字符串，指向菜单闭合时使用的图标。数组第二个元素可以是字符串也可以是number，当为字符串的时候它指向菜单展开时使用的图标，当为number时，表示菜单展开和闭合时使用同一个图标，但展开时图标顺时针旋转一个角度，这个角度的值即为数组第二个元素的值。
+> arrow 即箭头图标，它可以是数字，也可以是数组。当 arrow 为数字时，图标显示的是 listtree 自带的图标样式，目前提供 1 到 10 十种样式。当图标为数组时，用户可以从阿里巴巴图标库或Font Awesome图标库选择图标，也可以使用png、icon等图片格式的图标。数组的第一个元素数据类型是字符串，指向菜单闭合时使用的图标。数组第二个元素可以是字符串也可以是number，当为字符串的时候它指向菜单展开时使用的图标，当为number时，表示菜单展开和闭合时使用同一个图标，但展开时图标顺时针旋转一个角度，这个角度的值即为数组第二个元素的值。
 
->icon 为数字时比较简单也好理解，下面我们举例详细说明下 icon 为数组时的各种情况。
+>arrow 为数字时比较简单也好理解，下面我们举例详细说明下 arrow 为数组时的各种情况。
 
 **a 使用阿里巴巴图标库图标** 我们假设你已经在阿里巴巴图标库创建了自己的项目并已经添加或上传了自己的图标，现在打开[阿里巴巴图标库](http://www.iconfont.cn)进入你的项目，选择 Font class，点击下载至本地，将其解压放到mytree.vue同一个文件夹下，当然你也可以直接复制使用在线链接就不需要下载到本地了，如下图：
 
@@ -133,7 +133,7 @@ mytree.vue 组件中的代码如下：
 
     Vue.use(Listtree, {
       listData: require('./data.json'),
-      icon: ['iconfont xxxxxxxxxxxxx', 'iconfont yyyyyyyyyyyyyy']
+      arrow: ['iconfont xxxxxxxxxxxxx', 'iconfont yyyyyyyyyyyyyy']
     })
     Vue.prototype.$listClick = (parameter) => {
       if (parameter !== undefined) {
@@ -147,7 +147,7 @@ mytree.vue 组件中的代码如下：
 
 xxxxxxxxxxxxx 为闭合时的图标，yyyyyyyyyyyyyy 为展开时的图标，iconfont不可省略。xxxxxxxx/iconfont.css 为下载的阿里巴巴图标库中的css文件，如果使用在线链接的话直接把url里面的内容换成在线链接的地址就可以了
 
-当然上面代码中icon也可以替换成：icon: ['iconfont xxxxxxxxxxxxx', 90] ，此时表示菜单展开和闭合时图标都是 xxxxxxxxxxxxx，只是展开时图标顺时针旋转90度
+当然上面代码中arrow也可以替换成：arrow: ['iconfont xxxxxxxxxxxxx', 90] ，此时表示菜单展开和闭合时图标都是 xxxxxxxxxxxxx，只是展开时图标顺时针旋转90度
 
 **b 使用Font Awesome图标库** 打开[Font Awesome网站](http://www.fontawesome.com.cn)并下载最新版Font Awesome，将Font Awesome解压到mytree.vue同一个文件夹，mytree.vue 代码如下：
 
@@ -162,7 +162,7 @@ xxxxxxxxxxxxx 为闭合时的图标，yyyyyyyyyyyyyy 为展开时的图标，ico
 
     Vue.use(Listtree, {
       listData: require('../static/data.json'),
-      icon: ['fa xxxxxxxxxxxxx', 'fa yyyyyyyyyyyyyy']
+      arrow: ['fa xxxxxxxxxxxxx', 'fa yyyyyyyyyyyyyy']
     })
     Vue.prototype.$listClick = (parameter) => {
       if (parameter !== undefined) {
@@ -174,9 +174,9 @@ xxxxxxxxxxxxx 为闭合时的图标，yyyyyyyyyyyyyy 为展开时的图标，ico
     @import url("./font-awesome-4.7.0/css/font-awesome.min.css");
     </style>
 
-xxxxxxxxxxxxx 为闭合时的图标，yyyyyyyyyyyyyy 为展开时的图标，fa不可省略。代码中icon也可以替换成：icon: ['fa xxxxxxxxxxxxx', 90] ，此时表示菜单展开和闭合时图标都是 xxxxxxxxxxxxx，只是展开时图标顺时针旋转90度
+xxxxxxxxxxxxx 为闭合时的图标，yyyyyyyyyyyyyy 为展开时的图标，fa不可省略。代码中arrow也可以替换成：arrow: ['fa xxxxxxxxxxxxx', 90] ，此时表示菜单展开和闭合时图标都是 xxxxxxxxxxxxx，只是展开时图标顺时针旋转90度
 
-**c 使用png、icon等图片格式作为图标** 建议将图片存放在static文件夹里，mytree.vue 代码如下：
+**c 使用png、arrow等图片格式作为图标** 建议将图片存放在static文件夹里，mytree.vue 代码如下：
 
     <template>
       <div class="hello">
@@ -189,7 +189,7 @@ xxxxxxxxxxxxx 为闭合时的图标，yyyyyyyyyyyyyy 为展开时的图标，fa�
 
     Vue.use(Listtree, {
       listData: require('../static/data.json'),
-      icon: ['../static/xxxxxxxxxxxxx', '../static/yyyyyyyyyyyyy']
+      arrow: ['../static/xxxxxxxxxxxxx', '../static/yyyyyyyyyyyyy']
     })
     Vue.prototype.$listClick = (parameter) => {
       if (parameter !== undefined) {
@@ -200,15 +200,15 @@ xxxxxxxxxxxxx 为闭合时的图标，yyyyyyyyyyyyyy 为展开时的图标，fa�
     <style>
     </style>
 
-xxxxxxxxxxxxx 为闭合时的图标，yyyyyyyyyyyyyy 为展开时的图标。代码中icon也可以替换成：icon: ['../static/xxxxxxxxxxxxx', 90] ，此时表示菜单展开和闭合时图标都是 ../static/xxxxxxxxxxxxx，只是展开时图标顺时针旋转90度
+xxxxxxxxxxxxx 为闭合时的图标，yyyyyyyyyyyyyy 为展开时的图标。代码中arrow也可以替换成：arrow: ['../static/xxxxxxxxxxxxx', 90] ，此时表示菜单展开和闭合时图标都是 ../static/xxxxxxxxxxxxx，只是展开时图标顺时针旋转90度
 
-> 在icon里面设置的图标是单一的，也就是说所有的菜单分支图标都是一样的，如果你想要将某一个分支单独设置一个图标或者干脆让每个分支图标都不一样该怎么办呢，还记得前面提到过的 listData 参数吗，listData 元素里面有个icon属性，listData 每个元素都代表着一个菜单分支，设置某一分支的icon属性，该分支就拥有一个独立的图标。listData 里面的icon数据类型是数组，同样该数组第一个元素代表的是菜单闭合时的图标，第二个元素如果是字符串代表的就是菜单展开时的图标，如果是数字代表的就是图标旋转的角度，此时菜单展开时的图标和闭合时的图标是一样的。listData 元素里面有个icon属性和参数 icon 使用方法上都一样，它也可以使用阿里巴巴图标库、Font Awesome图标库和png、icon等格式图片作为图标。当然如果你不想在菜单里加任何的图标，可以将icon参数直接设为0就可以了。
+> 在arrow里面设置的图标是单一的，也就是说所有的菜单分支图标都是一样的，如果你想要将某一个分支单独设置一个图标或者干脆让每个分支图标都不一样该怎么办呢，还记得前面提到过的 listData 参数吗，listData 元素里面有个icon属性，listData 每个元素都代表着一个菜单分支，设置某一分支的icon属性，该分支就拥有一个独立的图标。listData 里面的icon数据类型是数组，同样该数组第一个元素代表的是菜单闭合时的图标，第二个元素如果是字符串代表的就是菜单展开时的图标，如果是数字代表的就是图标旋转的角度，此时菜单展开时的图标和闭合时的图标是一样的。listData 元素里面有个icon属性和参数 arrow 使用方法上都一样，它也可以使用阿里巴巴图标库、Font Awesome图标库和png、icon等格式图片作为图标。当然如果你不想在菜单里加任何的图标，可以将arrow参数直接设为0就可以了。
 
-注：权重大小 listData中的icon > 参数icon，如果你设置了参数icon，同时某个分支对应的listData又设置了icon，那么该分支图标将显示listData中设置的icon
+注：权重大小 listData中的arrow > 参数arrow，如果你设置了参数arrow，同时某个分支对应的listData又设置了arrow，那么该分支图标将显示listData中设置的arrow
 
-### 7、iconSize [Number 可选]
+### 7、arrowSize [Number 可选]
 
-> iconSize 控制图标的尺寸，单位为px，该参数没有默认值，如果你没有设置该值，则图标大小会被与之最近的fong-size控制，因为这里的图标本质上也是一种字体（用图片作为图标的除外），所以你也可以通过设置font-size的值来控制图标尺寸。但当图标为图片时，iconSize和font-size对图标无效。
+> arrowSize 控制图标的尺寸，单位为px，该参数没有默认值，如果你没有设置该值，则图标大小会被与之最近的fong-size控制，因为这里的图标本质上也是一种字体（用图片作为图标的除外），所以你也可以通过设置font-size的值来控制图标尺寸。但当图标为图片时，arrowSize和font-size对图标无效。
 
 ### 8、animation [Number 1 可选]
 
@@ -229,46 +229,46 @@ xxxxxxxxxxxxx 为闭合时的图标，yyyyyyyyyyyyyy 为展开时的图标。代
 
 ### 2、菜单分支及其图标的 ID
 
-菜单分支的 ID 等于 "lt-branch_" 加上该分支的index，该菜单分支所对应的图标 ID 等于 "lt-branch-icon_" 加上该分支的index。
+菜单分支的 ID 等于 "lt-branch_" 加上该分支的index，该菜单分支所对应的图标 ID 等于 "lt-branch-arrow_" 加上该分支的index。
 
 ### 3、不同级别菜单分支的 className
 
-不同级别菜单分支的 className 等于 "lt-branch_level_" 加上该菜单的级别。不同级别菜单分支对应的图标的 className 等于 "lt-branch-icon_level_" 加上该菜单的级别。如果一个菜单分支没有子级菜单，该类菜单还拥有样式："_lt-branch_level_0_"，该类菜单的图标拥有样式："_lt-branch-icon_level_0_"。lt-branch-icon_level_0 和表示级别分支的 className 可同时存在。如下：
+不同级别菜单分支的 className 等于 "lt-branch_level_" 加上该菜单的级别。不同级别菜单分支对应的图标的 className 等于 "lt-branch-arrow_level_" 加上该菜单的级别。如果一个菜单分支没有子级菜单，该类菜单还拥有样式："_lt-branch_level_0_"，该类菜单的图标拥有样式："_lt-branch-arrow_level_0_"。lt-branch-arrow_level_0 和表示级别分支的 className 可同时存在。如下：
 
     lt-branch_level_1         >>>>>>      一级菜单分支样式
     lt-branch_level_2         >>>>>>      二级菜单分支样式
     lt-branch_level_3         >>>>>>      三级菜单分支样式
     ……
 
-    lt-branch-icon_level_1    >>>>>>      一级菜单分支图标样式
-    lt-branch-icon_level_2    >>>>>>      二级菜单分支图标样式
-    lt-branch-icon_level_3    >>>>>>      三级菜单分支图标样式
+    lt-branch-arrow_level_1    >>>>>>      一级菜单分支图标样式
+    lt-branch-arrow_level_2    >>>>>>      二级菜单分支图标样式
+    lt-branch-arrow_level_3    >>>>>>      三级菜单分支图标样式
     ……
 
     lt-branch_level_0         >>>>>>      没有子级的菜单分支的样式
-    lt-branch-icon_level_0    >>>>>>      没有子级的菜单分支图标的样式
+    lt-branch-arrow_level_0    >>>>>>      没有子级的菜单分支图标的样式
 
 
 ### 4、菜单分支被点击后的 className
 
 某个菜单分支被点击后会增加一个样式："_lt-branch_active_"，这个被点击的分支父级分支也会增加一个样式："_lt-branch_active_parent_"，同时这个被点击的分支所有祖先分支都会增加active样式，这些active样式名目规则是：如果祖先分支是一级分支，增加的样式名为："_lt-branch_level_1_active_"，如果祖先分支是二级分支，增加的样式名为："_lt-branch_level_2_active_" …… ，以此类推。lt-branch_active 和代表级别的active样式可同时存在，比如：点击一个二级分支，该二级分支会同时包含lt-branch_level_2_active 和 lt-branch_active 2个样式。同样，lt-branch_active_parent 和代表级别的active样式也可同时存在。
 
-同理，某个菜单分支被点击后其对应的图标也会增加一个样式："_lt-branch-icon_active_"，这个被点击的分支父级分支对应的图标增加一个样式："_lt-branch-icon_active_parent_"，其祖先分支对应的图标增加的样式为："_lt-branch-icon_level_1_active_"、 "_lt-branch-icon_level_2_active_"、 "_lt-branch-icon_level_3_active_" …… 。
+同理，某个菜单分支被点击后其对应的图标也会增加一个样式："_lt-branch-arrow_active_"，这个被点击的分支父级分支对应的图标增加一个样式："_lt-branch-arrow_active_parent_"，其祖先分支对应的图标增加的样式为："_lt-branch-arrow_level_1_active_"、 "_lt-branch-arrow_level_2_active_"、 "_lt-branch-arrow_level_3_active_" …… 。
 
     lt-branch_active                 >>>>>>       当前被点击的菜单分支的样式
-    lt-branch-icon_active            >>>>>>       当前被点击的菜单分支图标的样式
+    lt-branch-arrow_active            >>>>>>       当前被点击的菜单分支图标的样式
 
     lt-branch_active_parent          >>>>>>       当前被点击的菜单分支父级分支的样式
-    lt-branch-icon_active_parent     >>>>>>       当前被点击的菜单分支父级分支图标的样式
+    lt-branch-arrow_active_parent     >>>>>>       当前被点击的菜单分支父级分支图标的样式
 
     lt-branch_level_1_active         >>>>>>       当前被点击的菜单分支祖先一级分支的样式
     lt-branch_level_2_active         >>>>>>       当前被点击的菜单分支祖先二级分支的样式
     lt-branch_level_3_active         >>>>>>       当前被点击的菜单分支祖先三级分支的样式
     ……
 
-    lt-branch-icon_level_1_active         >>>>>>       当前被点击的菜单分支祖先一级分支图标的样式
-    lt-branch-icon_level_2_active         >>>>>>       当前被点击的菜单分支祖先二级分支图标的样式
-    lt-branch-icon_level_3_active         >>>>>>       当前被点击的菜单分支祖先三级分支图标的样式
+    lt-branch-arrow_level_1_active         >>>>>>       当前被点击的菜单分支祖先一级分支图标的样式
+    lt-branch-arrow_level_2_active         >>>>>>       当前被点击的菜单分支祖先二级分支图标的样式
+    lt-branch-arrow_level_3_active         >>>>>>       当前被点击的菜单分支祖先三级分支图标的样式
     ……
 
 

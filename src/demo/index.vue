@@ -22,6 +22,7 @@
         <span>  实现方法：设置样式 .lt-branch_active span 和 .lt-branch_level_2_active span 。</span>
       </div>
     </router-link>
+    <router-link to="/demo2"><h2>二、仿vue-element-admin左侧菜单</h2></router-link>
   </div>
 </div>
 </template>

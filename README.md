@@ -43,9 +43,10 @@ listtree 是基于vue2.x的无限级菜单插件，基本可以满足大部分�
 
 > listtree 一共有9个参数：listData、open、openOnly、indent、spacing、arrow、arrowSize、animation、eventArea，通过配置这9个参数可以使 listtree 适应不同类型的菜单需求，为了描述方便，这里假设你要插入本插件的组件为mytree.vue(建议用空组件来引入本插件，然后在需要使用本本插件的地方直接import该组件)
 
-| 参数 | 属性 | 默认值 | 参数说明 |
-| ---- | ---- | ----- | ------- |
-| listData | Array 必选 | —— | 包含了所有菜单分支中的必要数据，listData 中每个元素代表一个分支，每个分支包含4个属性：name、icon、parameter、children |
+| 参数 | 属性 | 默认值 | 可能的值 | 描述 |
+| ---- | ---- | ----- | ----- | ------- |
+| listData | Array[必选] | —— | —— | 包含了所有菜单分支中的必要数据，listData 中每个元素代表一个分支，每个分支包含4个属性：name、icon、parameter、children |
+| open | any[可选] | 1 | 0，1，'always'，数组 | open 控制各菜单分支的默认展开闭合状态 |
 
 ### 1、listData [Array 必选]
 

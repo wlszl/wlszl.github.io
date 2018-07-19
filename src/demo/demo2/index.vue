@@ -5,7 +5,7 @@
 </template>
 <script>
   import Vue from 'vue'
-  import Listtree from '../../lib'
+  import Listtree from 'listtree'
   import listData from './listdata.json'
 
   (function () {

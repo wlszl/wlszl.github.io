@@ -10,7 +10,8 @@ export default new Router({
       path: '/',
       component: (resolve) => require(['./App'], resolve),
       // component: require('./App'),
-      name: 'app'
+      name: 'app',
+      redirect: '/demo1'
     },
     {
       path: '/demo1',
